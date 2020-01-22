@@ -47,5 +47,65 @@ var LikeButton = function (_React$Component) {
   return LikeButton;
 }(React.Component);
 
-var domContainer = document.querySelector("#content");
+var Perc = function (_React$PureComponent) {
+  _inherits(Perc, _React$PureComponent);
+
+  function Perc() {
+    _classCallCheck(this, Perc);
+
+    return _possibleConstructorReturn(this, (Perc.__proto__ || Object.getPrototypeOf(Perc)).apply(this, arguments));
+  }
+
+  _createClass(Perc, [{
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          label = _props.label,
+          _props$score = _props.score,
+          score = _props$score === undefined ? 0 : _props$score,
+          _props$total = _props.total,
+          total = _props$total === undefined ? Math.max(1, score) : _props$total;
+
+      return React.createElement(
+        "div",
+        { className: "white-text" },
+        React.createElement(
+          "h6",
+          null,
+          label
+        ),
+        React.createElement(
+          "span",
+          null,
+          Math.round(score / total * 100),
+          " %"
+        )
+      );
+    }
+  }]);
+
+  return Perc;
+}(React.PureComponent);
+
+function Copyright(props) {
+  return React.createElement(
+    "p",
+    { className: "white-text" },
+    "Copyright ",
+    props.company,
+    ", 2020"
+  );
+}
+
+// Изготовление компоненты с использованием React.CreateElement
+ReactDOM.render(e("div", null, "This text is rendered by using React.createElement"), document.getElementById("content1"));
+
+// Изготовление компоненты с использованием React.Component
+var domContainer = document.querySelector("#content2");
 ReactDOM.render(e(LikeButton), domContainer);
+
+// Отрендить компоненту  на основе React.PureComponent
+ReactDOM.render(React.createElement(Perc, { label: "Home Task is completed on ", score: "0.9999" }), document.getElementById("content3"));
+
+// Отрендить функциональную компоненту
+ReactDOM.render(React.createElement(Copyright, { company: "Vebkomas" }), document.getElementById("content4"));
