@@ -1,0 +1,30 @@
+{
+  "name": "01-core-concepts",
+  "version": "1.0.0",
+  "description": "Task 1 Core concepts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devstart": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Piatrenka/rmpe.git"
+  },
+  "keywords": [
+    "react",
+    "learning"
+  ],
+  "author": "Ihar Piatrenka <ihar@vebkomas.lt>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Piatrenka/rmpe/issues"
+  },
+  "homepage": "https://github.com/Piatrenka/rmpe#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
