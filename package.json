@@ -6,7 +6,12 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "test": "jest",
-    "build": "webpack --mode production"
+    "watch": "wbpack --watch",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.env.js",
+    "build:dev": "webpack --mode development",
+    "build:prod": "webpack --mode production",
+    "build:dev2": "webpack --config webpack.dev.js",
+    "build:prod2": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -31,10 +36,13 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.1.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
   }
 }
