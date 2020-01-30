@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "test": "jest",
-    "watch": "wbpack --watch",
+    "watch": "webpack --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.env.js",
     "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
