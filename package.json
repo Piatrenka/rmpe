@@ -1,0 +1,48 @@
+{
+  "name": "rmpe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "test": "jest",
+    "watch": "webpack --watch",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.env.js",
+    "build:dev": "webpack --mode development",
+    "build:prod": "webpack --mode production",
+    "build:dev2": "webpack --config webpack.dev.js",
+    "build:prod2": "webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Piatrenka/rmpe.git"
+  },
+  "keywords": [],
+  "author": "Ihar Piatrenka <ihar@vebkomas.lt>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Piatrenka/rmpe/issues"
+  },
+  "homepage": "https://github.com/Piatrenka/rmpe#readme",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^25.1.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
+  }
+}
