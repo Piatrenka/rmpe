@@ -4,15 +4,28 @@ import SearchRegion from "../SearchRegion/SearchRegion"
 import SelectedRegion from "../SelectedRegion/SelectedRegion"
 
 function RegionControl(props) {
-  console.log(props)
+  // console.log(props)
 
   const isShowSearch = props.state.isShowSearch;
   let region;
 
   if (isShowSearch) {
-    region = <SearchRegion />;
+    region = (
+      <SearchRegion 
+        state={props.state}
+        onSearchStrChange={props.onSearchStrChange}
+        onSearchModeChange={props.onSearchModeChange}
+        onSubmit={props.onSubmit}
+      />
+    );
   } else {
-    region = <SelectedRegion />;
+    region = (
+      <SelectedRegion 
+        state={props.state} 
+        onClick={props.onClick}
+        onSearchStrChange={props.onSearchStrChange}
+      />
+    );
   }
 
   return (
