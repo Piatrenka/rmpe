@@ -23,7 +23,7 @@ const MovieInfo = props => {
       {/* <img src={props.movie.poster}></img> */}
       <p>{movie.title}</p>
       {/* <p>{movie.awards.text}</p> */}
-      {/* <p>{movie.imdb.rating}</p> */}
+      <p>{movie.imdb.rating}</p>
       <p>{movie.year}</p>
       <p>{movie.genres.join(', ')}</p>
       {/* <p>{movie.runtime} min</p> */}

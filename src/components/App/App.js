@@ -94,6 +94,21 @@ class App extends Component {
       }
     })
 
+    // сортировка по условию
+    if (this.state.currentSortMode) {
+      movies2Show.sort(function(a, b) {
+        if (a.imdb.rating > b.imdb.rating) {return 1}
+        if (a.imdb.rating < b.imdb.rating) {return -1}
+        return 0
+      })
+    } else {
+      movies2Show.sort(function(a, b) {
+        if (a.year > b.year) {return 1}
+        if (a.year < b.year) {return -1}
+        return 0
+      })
+    }
+
     return (
       <div className={styles.App}>
         <header className={styles["App-header"]}>
@@ -120,7 +135,11 @@ class App extends Component {
             onSubmit={this.handleSubmit}
           />
 
-          <StatusBar state={this.state} onClick={this.handleSortModesClick} detectedAmount={movies2Show.length}/>
+          <StatusBar
+            state={this.state}
+            onClick={this.handleSortModesClick}
+            detectedAmount={movies2Show.length}
+          />
 
           <OutputRegion movies={movies2Show} />
         </ErrorBoundary>
