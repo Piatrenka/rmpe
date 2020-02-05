@@ -1,4 +1,5 @@
 import React from 'react'
+import Radium from "radium";
 import styles from './MovieInfo.css'
 
 const MovieInfo = props => {
@@ -18,8 +19,18 @@ const MovieInfo = props => {
     </React.Fragment>
   )
   
+  const style = {
+    border: "1px solid #ccc",
+    boxShadow: "0 4px 5px 0 rgba(0, 0, 0, .14)",
+    ":hover": {
+      border: "1px solid #aaa",
+      boxShadow: "0 4px 15px 0 rgba(0, 0, 0, .25)",
+      cursor: "pointer"
+    }
+  };
+
   const movieInfoShort = (
-    <React.Fragment>
+    <div>
       {/* <img src={props.movie.poster}></img> */}
       <p>{movie.title}</p>
       {/* <p>{movie.awards.text}</p> */}
@@ -28,15 +39,16 @@ const MovieInfo = props => {
       <p>{movie.genres.join(', ')}</p>
       {/* <p>{movie.runtime} min</p> */}
       {/* <p>{movie.plot}</p> */}
-    </React.Fragment>
+    </div>
   )
   
+
   return (
-    <div className={styles.region}>
+    <div className={styles.region} style={style}>
       <h6>This is the MovieInfo component</h6>
       {props.short ? movieInfoShort : movieInfo}
     </div>
-  )
+  );
 }
 
-export default MovieInfo
+export default Radium(MovieInfo)
