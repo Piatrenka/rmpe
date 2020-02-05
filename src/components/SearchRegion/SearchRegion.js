@@ -20,7 +20,7 @@ function SearchRegion(props) {
           Search By
           <select 
             value={props.state.currentSearchMode} 
-            onChange={e => {props.onSearchModeChange(e.target.value)}}
+            onChange={e => {props.onSearchModeChange(parseInt(e.target.value))}}
           >
             <option value={0}>{props.state.searchModes[0]}</option>
             <option value={1}>{props.state.searchModes[1]}</option>

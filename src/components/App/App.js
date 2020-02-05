@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import styles from './App.css';
 
+import { getRandomInt } from '../../utils/common'
+
 import Movies from "../../assets/Movies"
 
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 
 import RegionControl from '../RegionControl/RegionControl'
 import StatusBar from '../StatusBar/StatusBar'
-import OutputRegion from '../OutputRegion/OutputRegion';
+import OutputRegion from '../OutputRegion/OutputRegion'
+import Logo from '../Logo/Logo'
 
 class App extends Component {
   constructor(props) {
@@ -17,10 +20,11 @@ class App extends Component {
       isShowSearch: false,          // Режим ввода строки поиска, иначе показ кликнутого фильма
       isSearchWasApplied: false,    // Кликнута кнопка 'искать'
       searchStr: "",                // Строка поиска
-      currentSearchMode: 0,         // Возможные варианты 'TITLE', 'GENRE', 'ALL'
+      currentSearchMode: 0,         // Возможные варианты поиска 'TITLE', 'GENRE', 'ALL'
       searchModes: ['TITLE', 'GENRE', 'ALL'],
-      currentSortBy: ["RELEASED"],  // Возможные варианты 'RELEASED', 'RATING'
-      selectedCardIndex: 1          // индекс элемента с фильмом по клику
+      currentSortMode: 0,                    // Возможные варианты сортировки 'RELEASED', 'RATING'
+      sortModes: ['RELEASED', 'RATING'],     
+      selectedCardIndex: getRandomInt(Movies.length)  // индекс элемента с фильмом по клику, первый раз случайный
     };
   
     // просто пипец, насколько отвратительная конструкция 
@@ -28,6 +32,7 @@ class App extends Component {
     this.handleSearchStrChange = this.handleSearchStrChange.bind(this)
     this.handleSearchModeChange = this.handleSearchModeChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSortModesClick = this.handleSortModesClick.bind(this)
   }
 
   // обработчик для переключения показа содержимого региона между поиском и показом выбранной записи 
@@ -59,6 +64,12 @@ class App extends Component {
     })
   }
 
+  handleSortModesClick(sortMode) {
+    this.setState({
+      currentSortMode: sortMode
+    })
+  }
+
   render() {
     // console.log(styles)
     // console.log(this.state.movies)
@@ -67,40 +78,37 @@ class App extends Component {
 
     return (
       <div className={styles.App}>
-        
-        <header className={styles['App-header']}>
+        <header className={styles["App-header"]}>
           <h1>RMPE App</h1>
-          <h6>Copyright {data.company}, {data.created.getFullYear()}</h6>
+          <h6>
+            Copyright {data.company}, {data.created.getFullYear()}
+          </h6>
         </header>
-        
+
         {/* <div>
           {this.state.movies.map((movie, i) => (
             <p key={i}>{movie.title}</p>
           ))}
         </div> */}
-        
-        <ErrorBoundary>
 
-          <RegionControl 
-            state={this.state} 
+        <Logo />
+
+        <ErrorBoundary>
+          <RegionControl
+            state={this.state}
             onClick={this.handleIsShowSearchClick}
             onSearchStrChange={this.handleSearchStrChange}
             onSearchModeChange={this.handleSearchModeChange}
             onSubmit={this.handleSubmit}
-            />
-        
-          <StatusBar 
-            state={this.state} 
-            />
-
-          <OutputRegion 
-            state={this.state} 
           />
-        
-        </ErrorBoundary>
 
+          <StatusBar state={this.state} onClick={this.handleSortModesClick} />
+
+          <OutputRegion state={this.state} />
+        </ErrorBoundary>
+        <Logo />
       </div>
-    )
+    );
   }
 }
 
