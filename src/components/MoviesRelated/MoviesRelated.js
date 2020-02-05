@@ -4,7 +4,7 @@ import styles from './MoviesRelated.css'
 const MoviesRelated = props => {
   return (
     <div className={styles.region}>
-      <h5>This is MoviesRelated Component</h5>
+      <h6>This is MoviesRelated Component</h6>
 
     </div>
   )

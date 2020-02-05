@@ -11,7 +11,7 @@ const SelectedRegion= props => {
 
   return (
     <div className={styles.region}>
-      <h5>This is SelectedRegion Component</h5>
+      <h6>This is SelectedRegion Component</h6>
       <button onClick={props.onClick}>Return to search</button>
       <MovieInfo movie={movie} />
     </div>

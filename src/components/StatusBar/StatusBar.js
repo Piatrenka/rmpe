@@ -42,7 +42,7 @@ const StatusBar = props => {
     
   return (
     <div className={styles.region}>
-      <h5>This is StatusBar Component</h5>
+      <h6>This is StatusBar Component</h6>
       {detectedAmount}
       {sortBy}
     </div>

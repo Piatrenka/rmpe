@@ -6,7 +6,7 @@ function SearchRegion(props) {
 
   return (
     <div className={styles.region}>
-      <h5>This is SearchRegion Component</h5>
+      <h6>This is SearchRegion Component</h6>
       <form>
         <label>Find your movie</label>
         <input

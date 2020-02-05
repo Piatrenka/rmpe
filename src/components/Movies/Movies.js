@@ -7,7 +7,7 @@ const Movies = props => {
 
   return (
     <div className={styles.region}>
-      <h5>This is Movies Component</h5>
+      <h6>This is Movies Component</h6>
       {props.movies.map((movie, i) => (
         <div key={i}>
           <MovieInfo movie={movie} short={true}/>

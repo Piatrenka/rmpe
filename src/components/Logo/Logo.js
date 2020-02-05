@@ -4,7 +4,7 @@ import styles from './Logo.css'
 const Logo = props => {
   return (
     <div className={styles.region}>
-      <h5>This is Logo Component</h5>
+      <h6>This is Logo Component</h6>
       <p className={styles.logo}><strong>netflix</strong>roulette</p>
     </div>
   )
