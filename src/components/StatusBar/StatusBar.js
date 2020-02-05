@@ -6,7 +6,7 @@ const StatusBar = props => {
 
   const detectedAmount = (
     <div>
-      <strong> {props.state.movies.length} movie found</strong>
+      <strong> {props.detectedAmount} movie found</strong>
     </div>
   );
 

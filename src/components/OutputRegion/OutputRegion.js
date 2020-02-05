@@ -6,29 +6,11 @@ import MoviesRelated from '../MoviesRelated/MoviesRelated'
 
 const OutputRegion = props => {
 
-  // получить фильмы для отображения
-  const movies2Show = props.state.movies.filter(movie => {
-    switch(props.state.currentSearchMode) {
-      case 0: {
-        return movie.title.toUpperCase().includes(props.state.searchStr.toUpperCase())
-      }
-      case 1: {
-        return movie.genres.join('').toUpperCase().includes(props.state.searchStr.toUpperCase())
-      }
-      case 2: {
-        return (
-          movie.title.toUpperCase().includes(props.state.searchStr.toUpperCase()) ||
-          movie.genres.join('').toUpperCase().includes(props.state.searchStr.toUpperCase())
-        );
-      }
-    }
-  })
-
   let comp;
 
-  if (movies2Show.length > 0) {
+  if (props.movies.length > 0) {
     comp = (
-      <Movies movies={movies2Show}/>
+      <Movies movies={props.movies}/>
     )
   } else {
     comp = (

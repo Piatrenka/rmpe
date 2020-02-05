@@ -76,6 +76,24 @@ class App extends Component {
     
     const data = this.props.data
 
+    // получить фильмы для отображения
+    const movies2Show = this.state.movies.filter(movie => {
+      switch(this.state.currentSearchMode) {
+        case 0: {
+          return movie.title.toUpperCase().includes(this.state.searchStr.toUpperCase())
+        }
+        case 1: {
+          return movie.genres.join('').toUpperCase().includes(this.state.searchStr.toUpperCase())
+        }
+        case 2: {
+          return (
+            movie.title.toUpperCase().includes(this.state.searchStr.toUpperCase()) ||
+            movie.genres.join('').toUpperCase().includes(this.state.searchStr.toUpperCase())
+          );
+        }
+      }
+    })
+
     return (
       <div className={styles.App}>
         <header className={styles["App-header"]}>
@@ -102,9 +120,9 @@ class App extends Component {
             onSubmit={this.handleSubmit}
           />
 
-          <StatusBar state={this.state} onClick={this.handleSortModesClick} />
+          <StatusBar state={this.state} onClick={this.handleSortModesClick} detectedAmount={movies2Show.length}/>
 
-          <OutputRegion state={this.state} />
+          <OutputRegion movies={movies2Show} />
         </ErrorBoundary>
         <Logo />
       </div>
