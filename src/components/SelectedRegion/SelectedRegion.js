@@ -1,21 +1,23 @@
 import React from "react";
 import styles from "./SelectedRegion.css";
-import MovieInfo from '../MovieInfo/MovieInfo'
+import MovieInfo from "../MovieInfo/MovieInfo";
 
-const SelectedRegion= props => {
+import Button from "react-bootstrap/Button";
+
+const SelectedRegion = props => {
   // console.log(props)
   // console.log(props.state.movies);
 
-  const movie = props.state.movies[props.state.selectedCardIndex]
+  const movie = props.state.movies[props.state.selectedCardIndex];
   // console.log(movie)
 
   return (
     <div className={styles.region}>
       <h6>This is SelectedRegion Component</h6>
-      <button onClick={props.onClick}>Return to search</button>
-      <MovieInfo movie={movie} />
+      <Button onClick={props.onClick}>Return to search</Button>
+      <MovieInfo movie={movie} onClick={() => {}} />
     </div>
   );
-}
+};
 
 export default SelectedRegion;

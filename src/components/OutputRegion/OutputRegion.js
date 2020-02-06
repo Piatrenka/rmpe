@@ -1,21 +1,16 @@
-import React from 'react'
-import styles from './OutputRegion.css'
-import Movies from '../Movies/Movies'
-import MoviesNotFound from '../MoviesNotFound/MoviesNotFound'
-import MoviesRelated from '../MoviesRelated/MoviesRelated'
+import React from "react";
+import styles from "./OutputRegion.css";
+import Movies from "../Movies/Movies";
+import MoviesNotFound from "../MoviesNotFound/MoviesNotFound";
+import MoviesRelated from "../MoviesRelated/MoviesRelated";
 
 const OutputRegion = props => {
-
   let comp;
 
   if (props.movies.length > 0) {
-    comp = (
-      <Movies movies={props.movies}/>
-    )
+    comp = <Movies movies={props.movies} onClick={props.onClick} />;
   } else {
-    comp = (
-      <MoviesNotFound />
-    )
+    comp = <MoviesNotFound />;
   }
 
   return (
@@ -24,7 +19,7 @@ const OutputRegion = props => {
       {comp}
       <MoviesRelated />
     </div>
-  )
-}
+  );
+};
 
-export default OutputRegion
+export default OutputRegion;

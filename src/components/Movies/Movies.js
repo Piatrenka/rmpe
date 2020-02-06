@@ -1,20 +1,28 @@
-import React from 'react'
-import styles from './Movies.css'
+import React from "react";
+import styles from "./Movies.css";
 
-import MovieInfo from '../MovieInfo/MovieInfo'
+import MovieInfo from "../MovieInfo/MovieInfo";
 
 const Movies = props => {
+  let movies = null;
+
+  movies = props.movies.map((movie, index) => {
+    return (
+      <MovieInfo
+        key={index}
+        movie={movie}
+        short={true}
+        onClick={props.onClick}
+      />
+    );
+  });
 
   return (
     <div className={styles.region}>
       <h6>This is Movies Component</h6>
-      {props.movies.map((movie, i) => (
-        <div key={i}>
-          <MovieInfo movie={movie} short={true}/>
-        </div>
-      ))}
+      <div>{movies}</div>
     </div>
   );
-}
+};
 
-export default Movies
+export default Movies;
