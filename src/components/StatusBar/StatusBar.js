@@ -1,5 +1,7 @@
-import React from 'react'
-import styles from './StatusBar.css'
+import React from "react";
+import styles from "./StatusBar.css";
+
+import { SortModes } from "../../utils/common";
 
 const StatusBar = props => {
   // console.log(props)
@@ -17,36 +19,36 @@ const StatusBar = props => {
       <form>
         <label>Sort By</label>
         <label>
-          <input 
+          <input
             type="radio"
             name="sortBy"
-            value={0}
-            checked={props.state.currentSortMode === 0}
-            onChange={(e) => props.onClick(parseInt(e.target.value))}
-          />          
+            value={SortModes.RELEASED}
+            checked={props.state.sortBy === SortModes.RELEASED}
+            onChange={e => props.onClick(e.target.value)}
+          />
           Release Date
         </label>
         <label>
-          <input 
+          <input
             type="radio"
             name="sortBy"
-            value={1}
-            checked={props.state.currentSortMode === 1}
-            onChange={(e) => props.onClick(parseInt(e.target.value))}
-          />          
+            value={SortModes.RATING}
+            checked={props.state.sortBy === SortModes.RATING}
+            onChange={e => props.onClick(e.target.value)}
+          />
           Rating
         </label>
       </form>
     </div>
-  )
-    
+  );
+
   return (
     <div className={styles.region}>
       <h6>This is StatusBar Component</h6>
       {detectedAmount}
       {sortBy}
     </div>
-  )
-}
+  );
+};
 
-export default StatusBar
+export default StatusBar;

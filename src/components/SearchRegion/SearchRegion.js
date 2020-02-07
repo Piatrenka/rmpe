@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./SearchRegion.css";
 
+import { SearchModes } from "../../utils/common";
+
 function SearchRegion(props) {
   // console.log(props);
 
@@ -21,12 +23,11 @@ function SearchRegion(props) {
           <select
             value={props.state.searchBy}
             onChange={e => {
-              props.onSearchModeChange(parseInt(e.target.value));
+              props.onSearchModeChange(e.target.value);
             }}
           >
-            <option value={0}>{props.state.searchModes[0]}</option>
-            <option value={1}>{props.state.searchModes[1]}</option>
-            <option value={2}>{props.state.searchModes[2]}</option>
+            <option value={SearchModes.TITLE}>{SearchModes.TITLE}</option>
+            <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
           </select>
         </label>
         <input type="button" value="Search" onClick={props.onSubmit} />

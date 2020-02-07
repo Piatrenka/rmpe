@@ -17,13 +17,10 @@ class App extends Component {
     super(props);
     this.state = {
       movies: Movies,
-      // isShowSearch: false, // Режим ввода строки поиска, иначе показ кликнутого фильма
-      // isSearchWasApplied: false, // Кликнута кнопка 'искать'
+      // isShowSearch: false,        // Режим ввода строки поиска, иначе показ кликнутого фильма
       searchQuery: "", // Строка поиска
-      searchBy: 0, // Возможные варианты поиска 'TITLE', 'GENRE', 'ALL'
-      searchModes: ["TITLE", "GENRE", "ALL"],
-      currentSortMode: 0, // Возможные варианты сортировки 'RELEASED', 'RATING'
-      sortModes: ["RELEASED", "RATING"],
+      searchBy: SearchModes.TITLE, // Возможные варианты поиска 'TITLE', 'GENRE'
+      sortBy: SortModes.RELEASED, // Возможные варианты сортировки 'RELEASED', 'RATING'
       selectedMovieId: getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
     };
 
@@ -44,30 +41,26 @@ class App extends Component {
   // обработчик изменения содержания строки поиска, передается в дочернюю компоненту для использования в ней
   handleSearchQueryChange(searchQuery) {
     this.setState({
-      searchQuery: searchQuery,
-      isSearchWasApplied: false
+      searchQuery: searchQuery
     });
   }
 
   // обработчик выбора режима поиска
-  handleSearchModeChange(searchMode) {
+  handleSearchModeChange = searchMode => {
     this.setState({
-      searchBy: searchMode,
-      isSearchWasApplied: false
+      searchBy: searchMode
     });
-  }
+  };
 
   // обработчик для кнопки поиска
   handleSubmit() {
     console.log("Button Search is clicked");
-    this.setState({
-      isSearchWasApplied: true
-    });
+    this.setState({});
   }
 
   handleSortModesClick(sortMode) {
     this.setState({
-      currentSortMode: sortMode
+      sortBy: sortMode
     });
   }
 
@@ -95,33 +88,33 @@ class App extends Component {
     // получить фильмы для отображения
     const movies2Show = this.state.movies.filter(movie => {
       switch (this.state.searchBy) {
-        case 0: {
+        case SearchModes.TITLE: {
           return movie.title
             .toUpperCase()
             .includes(this.state.searchQuery.toUpperCase());
         }
-        case 1: {
+        case SearchModes.GENRE: {
           return movie.genres
             .join("")
             .toUpperCase()
             .includes(this.state.searchQuery.toUpperCase());
         }
-        case 2: {
-          return (
-            movie.title
-              .toUpperCase()
-              .includes(this.state.searchQuery.toUpperCase()) ||
-            movie.genres
-              .join("")
-              .toUpperCase()
-              .includes(this.state.searchQuery.toUpperCase())
-          );
-        }
+        // case 2: {
+        //   return (
+        //     movie.title
+        //       .toUpperCase()
+        //       .includes(this.state.searchQuery.toUpperCase()) ||
+        //     movie.genres
+        //       .join("")
+        //       .toUpperCase()
+        //       .includes(this.state.searchQuery.toUpperCase())
+        //   );
+        // }
       }
     });
 
     // сортировка по условию
-    if (this.state.currentSortMode) {
+    if (this.state.sortBy === SortModes.RATING) {
       movies2Show.sort(function(a, b) {
         if (a.imdb.rating > b.imdb.rating) {
           return 1;
@@ -131,7 +124,7 @@ class App extends Component {
         }
         return 0;
       });
-    } else {
+    } else if (this.state.sortBy === SortModes.RELEASED) {
       movies2Show.sort(function(a, b) {
         if (a.year > b.year) {
           return 1;
