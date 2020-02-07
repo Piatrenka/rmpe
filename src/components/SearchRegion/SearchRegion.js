@@ -13,7 +13,7 @@ function SearchRegion(props) {
         <label>Find your movie</label>
         <input
           type="text"
-          value={props.state.searchQuery}
+          value={props.searchQuery}
           onChange={e => {
             props.onSearchQueryChange(e.target.value);
           }}
@@ -21,7 +21,7 @@ function SearchRegion(props) {
         <label>
           Search By
           <select
-            value={props.state.searchBy}
+            value={props.searchBy}
             onChange={e => {
               props.onSearchModeChange(e.target.value);
             }}

@@ -12,6 +12,8 @@ import StatusBar from "../StatusBar/StatusBar";
 import OutputRegion from "../OutputRegion/OutputRegion";
 import Logo from "../Logo/Logo";
 
+import MoviesPage from "../MoviesPage/MoviesPage";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -70,7 +72,7 @@ class App extends Component {
     // const i = this.state.movies.findIndex(movie => {
     //   return movie.imdb.id === id;
     // });
-    // console.log(i);
+    console.log(id);
 
     this.setState({
       selectedMovieId: this.state.movies.findIndex(movie => {
@@ -137,6 +139,25 @@ class App extends Component {
       });
     }
 
+    let page;
+    if (this.state.selectedMovieId) {
+      page = (
+        <MoviesPage
+          movies={movies2Show}
+          searchQuery={this.state.searchQuery}
+          searchBy={this.state.searchBy}
+          sortBy={this.state.sortBy}
+          onSearchQueryChange={this.handleSearchQueryChange}
+          onSearchModeChange={this.handleSearchModeChange}
+          onSortModeChange={this.handleSortModesClick}
+          detectedAmount={movies2Show.length}
+          onSubmit={this.handleSubmit}
+          onMovieClick={this.handleMovieClick}
+        />
+      );
+    } else {
+    }
+
     return (
       <div className={styles.App}>
         <header className={styles["App-header"]}>
@@ -155,7 +176,8 @@ class App extends Component {
         <Logo />
 
         <ErrorBoundary>
-          <RegionControl
+          {page}
+          {/* <RegionControl
             state={this.state}
             onClick={this.handleIsShowSearchClick}
             onSearchQueryChange={this.handleSearchQueryChange}
@@ -169,7 +191,7 @@ class App extends Component {
             detectedAmount={movies2Show.length}
           />
 
-          <OutputRegion movies={movies2Show} onClick={this.handleMovieClick} />
+          <OutputRegion movies={movies2Show} onClick={this.handleMovieClick} /> */}
         </ErrorBoundary>
         <Logo />
       </div>

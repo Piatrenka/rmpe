@@ -12,7 +12,7 @@ const Movies = props => {
         key={movie.imdb.id}
         movie={movie}
         short={true}
-        onClick={props.onClick}
+        onMovieClick={props.onMovieClick}
       />
     );
   });

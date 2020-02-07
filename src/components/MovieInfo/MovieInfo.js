@@ -54,7 +54,7 @@ const MovieInfo = props => {
     <div
       className={styles.region}
       style={style}
-      onClick={e => props.onClick(movie.imdb.id)}
+      onClick={e => props.onMovieClick(movie.imdb.id)}
     >
       <h6>This is the MovieInfo component</h6>
       {props.short ? movieInfoShort : movieInfo}

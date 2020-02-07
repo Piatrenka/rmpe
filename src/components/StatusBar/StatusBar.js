@@ -23,8 +23,8 @@ const StatusBar = props => {
             type="radio"
             name="sortBy"
             value={SortModes.RELEASED}
-            checked={props.state.sortBy === SortModes.RELEASED}
-            onChange={e => props.onClick(e.target.value)}
+            checked={props.sortBy === SortModes.RELEASED}
+            onChange={e => props.onSortModeChange(e.target.value)}
           />
           Release Date
         </label>
@@ -33,8 +33,8 @@ const StatusBar = props => {
             type="radio"
             name="sortBy"
             value={SortModes.RATING}
-            checked={props.state.sortBy === SortModes.RATING}
-            onChange={e => props.onClick(e.target.value)}
+            checked={props.sortBy === SortModes.RATING}
+            onChange={e => props.onSortModeChange(e.target.value)}
           />
           Rating
         </label>

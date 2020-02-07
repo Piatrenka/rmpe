@@ -8,7 +8,7 @@ const OutputRegion = props => {
   let comp;
 
   if (props.movies.length > 0) {
-    comp = <Movies movies={props.movies} onClick={props.onClick} />;
+    comp = <Movies movies={props.movies} onMovieClick={props.onMovieClick} />;
   } else {
     comp = <MoviesNotFound />;
   }
