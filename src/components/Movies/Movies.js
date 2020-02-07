@@ -6,10 +6,10 @@ import MovieInfo from "../MovieInfo/MovieInfo";
 const Movies = props => {
   let movies = null;
 
-  movies = props.movies.map((movie, index) => {
+  movies = props.movies.map(movie => {
     return (
       <MovieInfo
-        key={index}
+        key={movie.imdb.id}
         movie={movie}
         short={true}
         onClick={props.onClick}

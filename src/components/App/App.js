@@ -26,11 +26,11 @@ class App extends Component {
 
     // просто пипец, насколько отвратительная конструкция
     // this.handleIsShowSearchClick = this.handleIsShowSearchClick.bind(this);
-    this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
-    this.handleSearchModeChange = this.handleSearchModeChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSortModesClick = this.handleSortModesClick.bind(this);
-    this.handleMovieClick = this.handleMovieClick.bind(this);
+    // this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
+    // this.handleSearchModeChange = this.handleSearchModeChange.bind(this);
+    // this.handleSortModesClick = this.handleSortModesClick.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleMovieClick = this.handleMovieClick.bind(this);
   }
 
   // обработчик для переключения показа содержимого региона между поиском и показом выбранной записи
@@ -39,11 +39,11 @@ class App extends Component {
   };
 
   // обработчик изменения содержания строки поиска, передается в дочернюю компоненту для использования в ней
-  handleSearchQueryChange(searchQuery) {
+  handleSearchQueryChange = searchQuery => {
     this.setState({
       searchQuery: searchQuery
     });
-  }
+  };
 
   // обработчик выбора режима поиска
   handleSearchModeChange = searchMode => {
@@ -52,19 +52,20 @@ class App extends Component {
     });
   };
 
-  // обработчик для кнопки поиска
-  handleSubmit() {
-    console.log("Button Search is clicked");
-    this.setState({});
-  }
-
-  handleSortModesClick(sortMode) {
+  // обработчик выбора режима сортировки
+  handleSortModesClick = sortMode => {
     this.setState({
       sortBy: sortMode
     });
-  }
+  };
 
-  handleMovieClick(id) {
+  // обработчик для кнопки поиска
+  handleSubmit = () => {
+    console.log("Button Search is clicked");
+    this.setState({});
+  };
+
+  handleMovieClick = id => {
     // console.log(`${id} movie is clicked`);
     // const i = this.state.movies.findIndex(movie => {
     //   return movie.imdb.id === id;
@@ -77,7 +78,7 @@ class App extends Component {
       }),
       isShowSearch: false
     });
-  }
+  };
 
   render() {
     // console.log(styles)
