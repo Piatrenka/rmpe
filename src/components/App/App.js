@@ -7,12 +7,13 @@ import Movies from "../../assets/Movies";
 
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
-import RegionControl from "../RegionControl/RegionControl";
-import StatusBar from "../StatusBar/StatusBar";
-import OutputRegion from "../OutputRegion/OutputRegion";
+// import RegionControl from "../RegionControl/RegionControl";
+// import StatusBar from "../StatusBar/StatusBar";
+// import OutputRegion from "../OutputRegion/OutputRegion";
 import Logo from "../Logo/Logo";
 
 import MoviesPage from "../MoviesPage/MoviesPage";
+import MoviePage from "../MoviePage/MoviePage";
 
 class App extends Component {
   constructor(props) {
@@ -36,8 +37,10 @@ class App extends Component {
   }
 
   // обработчик для переключения показа содержимого региона между поиском и показом выбранной записи
-  handleIsShowSearchClick = () => {
-    this.setState(state => ({ isShowSearch: !state.isShowSearch }));
+  handleReturn2SearchClick = () => {
+    this.setState({
+      selectedMovieId: null
+    });
   };
 
   // обработчик изменения содержания строки поиска, передается в дочернюю компоненту для использования в ней
@@ -156,6 +159,17 @@ class App extends Component {
         />
       );
     } else {
+      page = (
+        <MoviePage
+          movies={movies2Show}
+          sortBy={this.state.sortBy}
+          onSortModeChange={this.handleSortModesClick}
+          detectedAmount={movies2Show.length}
+          onSubmit={this.handleSubmit}
+          onMovieClick={this.handleMovieClick}
+          selectedMovieId={this.selectedMovieId}
+        />
+      );
     }
 
     return (

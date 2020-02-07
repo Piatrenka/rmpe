@@ -8,13 +8,13 @@ const SelectedRegion = props => {
   // console.log(props)
   // console.log(props.state.movies);
 
-  const movie = props.state.movies[props.state.selectedMovieId];
+  const movie = props.movies[0];
   // console.log(movie)
 
   return (
     <div className={styles.region}>
       <h6>This is SelectedRegion Component</h6>
-      <Button onClick={props.onClick}>Return to search</Button>
+      <Button onClick={props.onMovieClick}>Return to search</Button>
       <MovieInfo movie={movie} onClick={() => {}} />
     </div>
   );
