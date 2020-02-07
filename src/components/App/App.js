@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./App.css";
 
-import { getRandomInt } from "../../utils/common";
+import { getRandomInt, SearchModes, SortModes } from "../../utils/common";
 
 import Movies from "../../assets/Movies";
 
@@ -17,19 +17,19 @@ class App extends Component {
     super(props);
     this.state = {
       movies: Movies,
-      isShowSearch: false, // Режим ввода строки поиска, иначе показ кликнутого фильма
-      isSearchWasApplied: false, // Кликнута кнопка 'искать'
-      searchStr: "", // Строка поиска
-      currentSearchMode: 0, // Возможные варианты поиска 'TITLE', 'GENRE', 'ALL'
+      // isShowSearch: false, // Режим ввода строки поиска, иначе показ кликнутого фильма
+      // isSearchWasApplied: false, // Кликнута кнопка 'искать'
+      searchQuery: "", // Строка поиска
+      searchBy: 0, // Возможные варианты поиска 'TITLE', 'GENRE', 'ALL'
       searchModes: ["TITLE", "GENRE", "ALL"],
       currentSortMode: 0, // Возможные варианты сортировки 'RELEASED', 'RATING'
       sortModes: ["RELEASED", "RATING"],
-      selectedCardIndex: getRandomInt(Movies.length) // индекс элемента с фильмом по клику, первый раз случайный
+      selectedMovieId: getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
     };
 
     // просто пипец, насколько отвратительная конструкция
-    this.handleIsShowSearchClick = this.handleIsShowSearchClick.bind(this);
-    this.handleSearchStrChange = this.handleSearchStrChange.bind(this);
+    // this.handleIsShowSearchClick = this.handleIsShowSearchClick.bind(this);
+    this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
     this.handleSearchModeChange = this.handleSearchModeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSortModesClick = this.handleSortModesClick.bind(this);
@@ -37,14 +37,14 @@ class App extends Component {
   }
 
   // обработчик для переключения показа содержимого региона между поиском и показом выбранной записи
-  handleIsShowSearchClick() {
+  handleIsShowSearchClick = () => {
     this.setState(state => ({ isShowSearch: !state.isShowSearch }));
-  }
+  };
 
   // обработчик изменения содержания строки поиска, передается в дочернюю компоненту для использования в ней
-  handleSearchStrChange(searchStr) {
+  handleSearchQueryChange(searchQuery) {
     this.setState({
-      searchStr: searchStr,
+      searchQuery: searchQuery,
       isSearchWasApplied: false
     });
   }
@@ -52,7 +52,7 @@ class App extends Component {
   // обработчик выбора режима поиска
   handleSearchModeChange(searchMode) {
     this.setState({
-      currentSearchMode: searchMode,
+      searchBy: searchMode,
       isSearchWasApplied: false
     });
   }
@@ -79,7 +79,7 @@ class App extends Component {
     // console.log(i);
 
     this.setState({
-      selectedCardIndex: this.state.movies.findIndex(movie => {
+      selectedMovieId: this.state.movies.findIndex(movie => {
         return movie.imdb.id === id;
       }),
       isShowSearch: false
@@ -94,27 +94,27 @@ class App extends Component {
 
     // получить фильмы для отображения
     const movies2Show = this.state.movies.filter(movie => {
-      switch (this.state.currentSearchMode) {
+      switch (this.state.searchBy) {
         case 0: {
           return movie.title
             .toUpperCase()
-            .includes(this.state.searchStr.toUpperCase());
+            .includes(this.state.searchQuery.toUpperCase());
         }
         case 1: {
           return movie.genres
             .join("")
             .toUpperCase()
-            .includes(this.state.searchStr.toUpperCase());
+            .includes(this.state.searchQuery.toUpperCase());
         }
         case 2: {
           return (
             movie.title
               .toUpperCase()
-              .includes(this.state.searchStr.toUpperCase()) ||
+              .includes(this.state.searchQuery.toUpperCase()) ||
             movie.genres
               .join("")
               .toUpperCase()
-              .includes(this.state.searchStr.toUpperCase())
+              .includes(this.state.searchQuery.toUpperCase())
           );
         }
       }
@@ -164,7 +164,7 @@ class App extends Component {
           <RegionControl
             state={this.state}
             onClick={this.handleIsShowSearchClick}
-            onSearchStrChange={this.handleSearchStrChange}
+            onSearchQueryChange={this.handleSearchQueryChange}
             onSearchModeChange={this.handleSearchModeChange}
             onSubmit={this.handleSubmit}
           />

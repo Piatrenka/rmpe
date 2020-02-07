@@ -8,7 +8,7 @@ const SelectedRegion = props => {
   // console.log(props)
   // console.log(props.state.movies);
 
-  const movie = props.state.movies[props.state.selectedCardIndex];
+  const movie = props.state.movies[props.state.selectedMovieId];
   // console.log(movie)
 
   return (

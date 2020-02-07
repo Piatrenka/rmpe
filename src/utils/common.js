@@ -15,4 +15,15 @@ function getNRandomWords(arr) {
   return a;
 }
 
-export { getRandomInt, getNRandomWords };
+const SearchModes = {
+  TITLE: "title",
+  GENRE: "genre",
+  ALL: "all"
+};
+
+const SortModes = {
+  RELEASED: "released",
+  RATING: "rating"
+};
+
+export { getRandomInt, getNRandomWords, SearchModes, SortModes };
