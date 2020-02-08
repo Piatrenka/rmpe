@@ -11,7 +11,7 @@ const MovieInfo = props => {
   const movieInfo = (
     <React.Fragment>
       <img
-        src={props.movie.poster}
+        src={movie.poster}
         onError={e => {
           e.target.onerror = null;
           e.target.src = posterNotFound;

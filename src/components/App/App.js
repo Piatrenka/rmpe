@@ -24,7 +24,7 @@ class App extends Component {
       searchQuery: "", // Строка поиска
       searchBy: SearchModes.TITLE, // Возможные варианты поиска 'TITLE', 'GENRE'
       sortBy: SortModes.RELEASED, // Возможные варианты сортировки 'RELEASED', 'RATING'
-      selectedMovieId: getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
+      selectedMovieId: null // "tt0012349" //null // getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
     };
 
     // просто пипец, насколько отвратительная конструкция
@@ -37,7 +37,7 @@ class App extends Component {
   }
 
   // обработчик для переключения показа содержимого региона между поиском и показом выбранной записи
-  handleReturn2SearchClick = () => {
+  handleReturn2MoviesClick = () => {
     this.setState({
       selectedMovieId: null
     });
@@ -78,10 +78,7 @@ class App extends Component {
     console.log(id);
 
     this.setState({
-      selectedMovieId: this.state.movies.findIndex(movie => {
-        return movie.imdb.id === id;
-      }),
-      isShowSearch: false
+      selectedMovieId: id
     });
   };
 
@@ -91,6 +88,14 @@ class App extends Component {
 
     const data = this.props.data;
 
+    // получить фильм для отображения
+    let movie2Show = null
+    if (this.state.selectedMovieId) {
+      movie2Show = this.state.movies.find(movie => {
+        return movie.imdb.id === this.state.selectedMovieId
+      })
+    }
+    
     // получить фильмы для отображения
     const movies2Show = this.state.movies.filter(movie => {
       switch (this.state.searchBy) {
@@ -142,18 +147,20 @@ class App extends Component {
       });
     }
 
+
     let page;
-    if (this.state.selectedMovieId) {
+    if (!this.state.selectedMovieId) {
       page = (
         <MoviesPage
           movies={movies2Show}
           searchQuery={this.state.searchQuery}
           searchBy={this.state.searchBy}
           sortBy={this.state.sortBy}
+          detectedAmount={movies2Show.length}
+          
           onSearchQueryChange={this.handleSearchQueryChange}
           onSearchModeChange={this.handleSearchModeChange}
           onSortModeChange={this.handleSortModesClick}
-          detectedAmount={movies2Show.length}
           onSubmit={this.handleSubmit}
           onMovieClick={this.handleMovieClick}
         />
@@ -161,13 +168,15 @@ class App extends Component {
     } else {
       page = (
         <MoviePage
+          movie={movie2Show}
           movies={movies2Show}
           sortBy={this.state.sortBy}
-          onSortModeChange={this.handleSortModesClick}
           detectedAmount={movies2Show.length}
-          onSubmit={this.handleSubmit}
-          onMovieClick={this.handleMovieClick}
           selectedMovieId={this.selectedMovieId}
+          
+          onReturn2MoviesClick={this.handleReturn2MoviesClick}
+          onSortModeChange={this.handleSortModesClick}
+          onMovieClick={this.handleMovieClick}
         />
       );
     }

@@ -11,7 +11,8 @@ function MoviePage(props) {
       <h6>This is the MoviePage Component</h6>
 
       <SelectedRegion
-        onReturn2SearchClick={props.onReturn2SearchClick}
+        movie={props.movie}
+        onReturn2MoviesClick={props.onReturn2MoviesClick}
         selectedMovieId={props.selectedMovieId}
       />
 
