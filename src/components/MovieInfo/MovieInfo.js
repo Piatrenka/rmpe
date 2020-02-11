@@ -77,10 +77,14 @@ const MovieInfo = props => {
   };
 
   const movieInfoShort = (
-    <React.Fragment 
-      
-    >
-      <Card.Img variant="top" src={props.movie.poster} />
+    <React.Fragment>
+      <Card.Img
+        src={movie.poster}
+        onError={e => {
+          e.target.onerror = null;
+          e.target.src = posterNotFound;
+        }}
+      />
       {/* <img src={props.movie.poster}></img> */}
       <p>{movie.title}</p>
       {/* <p>{movie.awards.text}</p> */}
