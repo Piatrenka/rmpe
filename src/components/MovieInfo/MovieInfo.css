@@ -1,7 +1,17 @@
 .region {
-  border: 1px solid #424242;
-  margin: 5px;
+  /* border: 1px solid #424242;
+  margin: 5px; */
   /* background-color: #232323;
   color: #cccccc; */
   /* width: 400px; */
+}
+
+.movie_card {
+  background-color: #0A0B0D;
+  color: aliceblue;
+}
+
+.poster {
+  margin-top: 17px;
+  margin-bottom: 17px;
 }

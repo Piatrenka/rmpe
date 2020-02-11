@@ -8,7 +8,7 @@ function MoviePage(props) {
   // console.log(props);
   return (
     <div className={styles.region}>
-      <h6>This is the MoviePage Component</h6>
+      {/* <h6>This is the MoviePage Component</h6> */}
 
       <SelectedRegion
         movie={props.movie}

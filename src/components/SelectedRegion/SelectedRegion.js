@@ -3,6 +3,12 @@ import styles from "./SelectedRegion.css";
 import MovieInfo from "../MovieInfo/MovieInfo";
 
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Form from "react-bootstrap/Form"
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
+import Logo from "../Logo/Logo";
 
 const SelectedRegion = props => {
   // console.log(props)
@@ -13,9 +19,12 @@ const SelectedRegion = props => {
 
   return (
     <div className={styles.region}>
-      <h6>This is SelectedRegion Component</h6>
-      <Button onClick={props.onReturn2MoviesClick}>Return to search</Button>
-      <MovieInfo movie={props.movie} onClick={() => {}} />
+      {/* <h6>This is SelectedRegion Component</h6> */}
+      <MovieInfo 
+        movie={props.movie} 
+        onMovieClick={() => {}} 
+        onReturn2MoviesClick={props.onReturn2MoviesClick}
+      />
     </div>
   );
 };

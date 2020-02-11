@@ -15,7 +15,7 @@ const OutputRegion = props => {
 
   return (
     <div className={styles.region}>
-      <h6>This is OutputRegion Component</h6>
+      {/* <h6>This is OutputRegion Component</h6> */}
       {comp}
       <MoviesRelated />
     </div>

@@ -8,7 +8,7 @@ function MoviesPage(props) {
   // console.log(props);
   return (
     <div className={styles.region}>
-      <h6>This is the MoviesPage Component</h6>
+      {/* <h6>This is the MoviesPage Component</h6> */}
 
       <SearchRegion
         searchQuery={props.searchQuery}

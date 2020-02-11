@@ -30,7 +30,7 @@ function RegionControl(props) {
 
   return (
     <div className={styles.region}>
-      <h6>This is RegionControl Component</h6>
+      {/* <h6>This is RegionControl Component</h6> */}
       {region}
     </div>
   );
