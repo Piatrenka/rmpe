@@ -24,7 +24,7 @@ const MovieInfo = props => {
             <Logo />
           </Col>
           <Col>
-            <div style={{margin: "5px"}} className="d-flex justify-content-end"> 
+            <div style={{marginTop: "10px"}} className="d-flex justify-content-end"> 
               <Button
                 variant="outline-light"
                 onClick={props.onReturn2MoviesClick}
@@ -71,7 +71,7 @@ const MovieInfo = props => {
     // boxShadow: "0 4px 5px 0 rgba(0, 0, 0, .14)",
     ":hover": {
       // border: "1px solid #aaa",
-      // boxShadow: "0 4px 15px 0 rgba(0, 0, 0, .25)",
+      boxShadow: "0 4px 15px 0 rgba(0, 0, 0, .25)",
       cursor: "pointer"
     }
   };
@@ -85,15 +85,12 @@ const MovieInfo = props => {
           e.target.src = posterNotFound;
         }}
       />
-      {/* <img src={props.movie.poster}></img> */}
-      <p>{movie.title}</p>
-      {/* <p>{movie.awards.text}</p> */}
-      <p>{movie.imdb.rating}</p>
-      <p>{movie.year}</p>
-      <p>{movie.genres.join(", ")}</p>
-      {/* <p>{movie.runtime} min</p> */}
-      {/* <p>{movie.plot}</p> */}
-      {/* <p>{props.key}</p> */}
+      <div className={styles.movie_card}>
+        <p>{movie.title}</p>
+        <p>{movie.imdb.rating}</p>
+        <p>{movie.year}</p>
+        <p>{movie.genres.join(", ")}</p>
+      </div>
     </React.Fragment>
   );
 

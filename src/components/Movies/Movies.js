@@ -12,8 +12,8 @@ const Movies = props => {
 
   movies = props.movies.map(movie => {
     return (
-      <Col xs="4" className="p-2" style={{backgroundColor: "black"}}>
-        <Card key={movie.imdb.id}>
+      <Col xs="4" className="p-2" style={{ backgroundColor: "grey" }}>
+        <Card key={movie.imdb.id} style={{ backgroundColor: "#0A0B0D" }}>
           <MovieInfo
             key={movie.imdb.id}
             movie={movie}
