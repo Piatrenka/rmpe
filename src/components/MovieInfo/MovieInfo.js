@@ -3,13 +3,13 @@ import Radium from "radium";
 import styles from "./MovieInfo.css";
 import posterNotFound from "../../keep-calm-poster-not-found.png";
 
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Card from "react-bootstrap/Card"
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
-import Button from "react-bootstrap/Button"
-import Logo from "../Logo/Logo"
+import Button from "react-bootstrap/Button";
+import Logo from "../Logo/Logo";
 
 const MovieInfo = props => {
   // console.log(props);
@@ -24,11 +24,14 @@ const MovieInfo = props => {
             <Logo />
           </Col>
           <Col>
-            <div style={{marginTop: "10px"}} className="d-flex justify-content-end"> 
+            <div
+              style={{ marginTop: "10px" }}
+              className="d-flex justify-content-end"
+            >
               <Button
                 variant="outline-light"
                 onClick={props.onReturn2MoviesClick}
-                >
+              >
                 Return to search
               </Button>
             </div>
@@ -101,7 +104,8 @@ const MovieInfo = props => {
       onClick={e => props.onMovieClick(movie.imdb.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
-      {props.short ? movieInfoShort : movieInfo}
+      {/* {props.short ? movieInfoShort : movieInfo} */}
+      {movieInfo}
     </div>
   );
 };
