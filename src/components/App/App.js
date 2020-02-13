@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styles from "./App.css";
 
-import { getRandomInt, SearchModes, SortModes } from "../../utils/common";
+import { SearchModes, SortModes } from "../../utils/common";
 
-import Movies from "../../assets/Movies";
+// import Movies from "../../assets/Movies";
+import { getMovie, getMovies } from "../../utils/api";
 
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
@@ -19,9 +20,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: Movies,
+      movies: [],
       // isShowSearch: false,        // Режим ввода строки поиска, иначе показ кликнутого фильма
-      searchQuery: "", // Строка поиска
+      searchQuery: "west", // Строка поиска
       searchBy: SearchModes.TITLE, // Возможные варианты поиска 'TITLE', 'GENRE'
       sortBy: SortModes.RELEASED, // Возможные варианты сортировки 'RELEASED', 'RATING'
       selectedMovieId: null // "tt0012349" //null // getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
@@ -82,71 +83,102 @@ class App extends Component {
     });
   };
 
+  async componentDidMount() {
+    const movies = await getMovies(
+      this.state.searchQuery,
+      this.state.searchBy,
+      this.state.sortBy
+    );
+    this.setState({
+      movies
+    });
+  }
+
+  // componentDidMount() {
+  //   console.log("componentDidMount");
+  //   console.log(
+  //     getMovies({
+  //       searchQuery: "",
+  //       searchBy: SearchModes.TITLE,
+  //       sortBy: SortModes.RELEASED
+  //     })
+  //   );
+  //   const movies = getMovies({
+  //     searchQuery: this.state.searchQuery,
+  //     searchBy: this.state.searchBy,
+  //     sortBy: this.state.sortBy
+  //   });
+  //   this.setState({
+  //     movies
+  //   });
+  // }
+
   render() {
     // console.log(styles)
     // console.log(this.state.movies)
 
-    const data = this.props.data;
+    // const data = this.props.data;
 
-    // получить фильм для отображения
-    let movie2Show = null
-    if (this.state.selectedMovieId) {
-      movie2Show = this.state.movies.find(movie => {
-        return movie.imdb.id === this.state.selectedMovieId
-      })
-    }
-    
-    // получить фильмы для отображения
-    const movies2Show = this.state.movies.filter(movie => {
-      switch (this.state.searchBy) {
-        case SearchModes.TITLE: {
-          return movie.title
-            .toUpperCase()
-            .includes(this.state.searchQuery.toUpperCase());
-        }
-        case SearchModes.GENRE: {
-          return movie.genres
-            .join("")
-            .toUpperCase()
-            .includes(this.state.searchQuery.toUpperCase());
-        }
-        // case 2: {
-        //   return (
-        //     movie.title
-        //       .toUpperCase()
-        //       .includes(this.state.searchQuery.toUpperCase()) ||
-        //     movie.genres
-        //       .join("")
-        //       .toUpperCase()
-        //       .includes(this.state.searchQuery.toUpperCase())
-        //   );
-        // }
-      }
-    });
+    // // получить фильм для отображения
+    // let movie2Show = null;
+    let movie2Show = [];
+    let movies2Show = this.state.movies;
+    // if (this.state.selectedMovieId) {
+    //   movie2Show = this.state.movies.find(movie => {
+    //     return movie.imdb.id === this.state.selectedMovieId;
+    //   });
+    // }
 
-    // сортировка по условию
-    if (this.state.sortBy === SortModes.RATING) {
-      movies2Show.sort(function(a, b) {
-        if (a.imdb.rating > b.imdb.rating) {
-          return 1;
-        }
-        if (a.imdb.rating < b.imdb.rating) {
-          return -1;
-        }
-        return 0;
-      });
-    } else if (this.state.sortBy === SortModes.RELEASED) {
-      movies2Show.sort(function(a, b) {
-        if (a.year > b.year) {
-          return 1;
-        }
-        if (a.year < b.year) {
-          return -1;
-        }
-        return 0;
-      });
-    }
+    // // получить фильмы для отображения
+    // const movies2Show = this.state.movies.filter(movie => {
+    //   switch (this.state.searchBy) {
+    //     case SearchModes.TITLE: {
+    //       return movie.title
+    //         .toUpperCase()
+    //         .includes(this.state.searchQuery.toUpperCase());
+    //     }
+    //     case SearchModes.GENRE: {
+    //       return movie.genres
+    //         .join("")
+    //         .toUpperCase()
+    //         .includes(this.state.searchQuery.toUpperCase());
+    //     }
+    //     // case 2: {
+    //     //   return (
+    //     //     movie.title
+    //     //       .toUpperCase()
+    //     //       .includes(this.state.searchQuery.toUpperCase()) ||
+    //     //     movie.genres
+    //     //       .join("")
+    //     //       .toUpperCase()
+    //     //       .includes(this.state.searchQuery.toUpperCase())
+    //     //   );
+    //     // }
+    //   }
+    // });
 
+    // // сортировка по условию
+    // if (this.state.sortBy === SortModes.RATING) {
+    //   movies2Show.sort(function(a, b) {
+    //     if (a.imdb.rating > b.imdb.rating) {
+    //       return 1;
+    //     }
+    //     if (a.imdb.rating < b.imdb.rating) {
+    //       return -1;
+    //     }
+    //     return 0;
+    //   });
+    // } else if (this.state.sortBy === SortModes.RELEASED) {
+    //   movies2Show.sort(function(a, b) {
+    //     if (a.year > b.year) {
+    //       return 1;
+    //     }
+    //     if (a.year < b.year) {
+    //       return -1;
+    //     }
+    //     return 0;
+    //   });
+    // }
 
     let page;
     if (!this.state.selectedMovieId) {
@@ -157,7 +189,6 @@ class App extends Component {
           searchBy={this.state.searchBy}
           sortBy={this.state.sortBy}
           detectedAmount={movies2Show.length}
-          
           onSearchQueryChange={this.handleSearchQueryChange}
           onSearchModeChange={this.handleSearchModeChange}
           onSortModeChange={this.handleSortModesClick}
@@ -173,7 +204,6 @@ class App extends Component {
           sortBy={this.state.sortBy}
           detectedAmount={movies2Show.length}
           selectedMovieId={this.selectedMovieId}
-          
           onReturn2MoviesClick={this.handleReturn2MoviesClick}
           onSortModeChange={this.handleSortModesClick}
           onMovieClick={this.handleMovieClick}
