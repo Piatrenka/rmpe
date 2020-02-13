@@ -79,24 +79,6 @@ const MovieInfo = props => {
     }
   };
 
-  const movieInfoShort = (
-    <React.Fragment>
-      <Card.Img
-        src={movie.poster}
-        onError={e => {
-          e.target.onerror = null;
-          e.target.src = posterNotFound;
-        }}
-      />
-      <div className={styles.movie_card}>
-        <p>{movie.title}</p>
-        <p>{movie.imdb.rating}</p>
-        <p>{movie.year}</p>
-        <p>{movie.genres.join(", ")}</p>
-      </div>
-    </React.Fragment>
-  );
-
   return (
     <div
       className={styles.region}
@@ -104,7 +86,6 @@ const MovieInfo = props => {
       onClick={e => props.onMovieClick(movie.imdb.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
-      {/* {props.short ? movieInfoShort : movieInfo} */}
       {movieInfo}
     </div>
   );
