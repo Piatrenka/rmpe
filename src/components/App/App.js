@@ -67,8 +67,18 @@ class App extends Component {
 
   // обработчик для кнопки поиска
   handleSubmit = () => {
-    console.log("Button Search is clicked");
-    this.setState({});
+    console.log(
+      `Button Search is clicked: [${this.state.searchQuery}], ${this.state.searchBy}, ${this.state.sortBy}`
+    );
+    getMovies(
+      this.state.searchQuery,
+      this.state.searchBy,
+      this.state.sortBy
+    ).then(movies => {
+      this.setState({
+        movies
+      });
+    });
   };
 
   handleMovieClick = id => {
@@ -123,11 +133,12 @@ class App extends Component {
     // let movie2Show = null;
     let movie2Show = [];
     let movies2Show = this.state.movies;
-    // if (this.state.selectedMovieId) {
-    //   movie2Show = this.state.movies.find(movie => {
-    //     return movie.imdb.id === this.state.selectedMovieId;
-    //   });
-    // }
+
+    if (this.state.selectedMovieId) {
+      movie2Show = this.state.movies.find(movie => {
+        return movie.imdb.id === this.state.selectedMovieId;
+      });
+    }
 
     // // получить фильмы для отображения
     // const movies2Show = this.state.movies.filter(movie => {
