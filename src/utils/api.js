@@ -59,6 +59,8 @@ function getMovies3(searchQuery, searchBy, sortBy, res, rej) {
 
 export function getMovies(searchQuery, searchBy, sortBy) {
   // console.log(searchQuery, searchBy, sortBy);
+  // searchQuery, searchBy, sortBy это параметры, которые передаются в вызов setMovies
+  // Promise, resolve, reject обязательное условие для функции, которую можно будет вызвать с декоратором await
   return new Promise((resolve, reject) => {
     setTimeout(setMovies, 1000, searchQuery, searchBy, sortBy, resolve, reject);
   });
