@@ -53,10 +53,6 @@ function setMovies(searchQuery, searchBy, sortBy, resolve, reject) {
   resolve(movies2Show);
 }
 
-function getMovies3(searchQuery, searchBy, sortBy, res, rej) {
-  res(allMovies);
-}
-
 export function getMovies(searchQuery, searchBy, sortBy) {
   // console.log(searchQuery, searchBy, sortBy);
   // searchQuery, searchBy, sortBy это параметры, которые передаются в вызов setMovies
