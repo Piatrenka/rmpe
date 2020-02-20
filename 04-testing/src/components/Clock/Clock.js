@@ -9,19 +9,22 @@ class Clock extends Component {
       currentTime: new Date().toString(),
       ss: new Date().getSeconds(),
       mm: new Date().getMinutes(),
-      hh: new Date().getHours()
+      hh: new Date().getMilliseconds()
     };
   }
 
   launchClock() {
     setInterval(() => {
-      this.setState(prevState => {
-        this.setState({
-          currentTime: new Date().toString(),
-          ss: prevState.ss + 0.01,
-          mm: prevState.mm + 0.01 / 60,
-          hh: prevState.hh + 0.01 / 60 / 12
-        });
+      let d = new Date();
+      let ss = d.getSeconds() + d.getMilliseconds() / 1000;
+      let mm = d.getMinutes() + ss / 60;
+      let hh = d.getHours() + mm / 60;
+
+      this.setState({
+        currentTime: d.toString(),
+        ss: ss,
+        mm: mm,
+        hh: hh
       });
     }, 10);
   }
