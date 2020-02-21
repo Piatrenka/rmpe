@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
 const AnalogDisplay = props => {
   // Преобразование строки в объект
-  let date = new Date(props.time.currentTime);
+  // let date = new Date(props.time.currentTime);
   let ss = props.time.ss;
   let mm = props.time.mm;
   let hh = props.time.hh;
@@ -14,26 +14,26 @@ const AnalogDisplay = props => {
   let dialStyle = {
     position: "relative",
     top: 0,
-    left: "40%",
+    left: 0,
     width: 200,
     height: 200,
-    border: "1px solid yellow",
+    border: "1px solid",
     borderRadius: 20000,
     // borderStyle: "solid",
     borderColor: "white",
-    boxSizing: "border-box",
-    margin: 10
+    // boxSizing: "border-box",
+    margin: "auto"
   };
 
   let dialStyle12 = {
     position: "absolute",
     top: -2,
     left: -2,
-    border: "1px solid red",
+    // border: "1px solid red",
     width: 202,
     height: 202,
     borderRadius: 202,
-    borderStyle: "solid",
+    // borderStyle: "solid",
     boxSizing: "border-box"
   };
 
@@ -145,6 +145,7 @@ const AnalogDisplay = props => {
         <div style={hourHandStyle} />
       </div>
       {/* <div style={dialStyle}></div> */}
+      <p>The end</p>
     </React.Fragment>
   );
 };
