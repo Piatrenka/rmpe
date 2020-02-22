@@ -8,7 +8,9 @@ function App() {
   return (
     <div className="App">
       <h1>I'm the App</h1>
-      <p>Vebkomas, 2020</p>
+      <p>
+        <a href='https://vebkomas.lt' target='_blank'>Vebkomas, 2020</a>
+      </p>
       <div>
         <Clock />
       </div>

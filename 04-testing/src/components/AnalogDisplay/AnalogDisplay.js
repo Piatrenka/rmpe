@@ -130,7 +130,7 @@ const AnalogDisplay = props => {
 
   return (
     <React.Fragment>
-      <p>I'm a AnalogDisplay comp</p>
+      <p>I'm an AnalogDisplay comp...</p>
 
       <div style={dialStyle}>
         <div style={dialStyle12}>
