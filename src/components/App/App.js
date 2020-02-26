@@ -16,13 +16,16 @@ import Logo from "../Logo/Logo";
 import MoviesPage from "../MoviesPage/MoviesPage";
 import MoviePage from "../MoviePage/MoviePage";
 
+// Just testing
+import HiddenMessage from "../../utils/hidden-message";
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movies: [],
       // isShowSearch: false,        // Режим ввода строки поиска, иначе показ кликнутого фильма
-      searchQuery: "west", // Строка поиска
+      searchQuery: "", // Строка поиска
       searchBy: SearchModes.TITLE, // Возможные варианты поиска 'TITLE', 'GENRE'
       sortBy: SortModes.RELEASED, // Возможные варианты сортировки 'RELEASED', 'RATING'
       selectedMovieId: null // "tt0012349" //null // getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
@@ -238,6 +241,13 @@ class App extends Component {
         </div> */}
 
         {/* <Logo /> */}
+
+        <div>
+          <HiddenMessage>
+            It ain't what you don't know that gets you into trouble. It's what
+            you know for sure that just ain't so...
+          </HiddenMessage>
+        </div>
 
         <ErrorBoundary>
           {page}
