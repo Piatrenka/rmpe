@@ -31,7 +31,7 @@ import "@testing-library/jest-dom";
 
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import HiddenMessage from "./hidden-message.test";
+import HiddenMessage from "./hidden-message";
 
 test("shows the children when the checkbox is checked", () => {
   const testMessage = "Test Message";
