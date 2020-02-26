@@ -7,7 +7,7 @@ function HiddenMessage({ children }) {
   const [showMessage, setShowMessage] = React.useState(false);
   return (
     <div>
-      <label htmlFor="toggle">Show Message</label>
+      <label htmlFor="toggle">Warning</label>
       <input
         id="toggle"
         type="checkbox"
