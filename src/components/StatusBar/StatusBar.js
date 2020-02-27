@@ -4,13 +4,14 @@ import styles from "./StatusBar.css";
 import { SortModes } from "../../utils/common";
 
 const StatusBar = props => {
-  // console.log(props)
+  // console.log(props.detectedAmount);
+  const tail = props.detectedAmount === 1 ? "" : "s";
 
   const detectedAmount = (
     <div>
       <strong>
         {" "}
-        {props.detectedAmount} movie{} was found
+        {props.detectedAmount} movie{tail} was found
       </strong>
     </div>
   );
