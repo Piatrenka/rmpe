@@ -8,7 +8,10 @@ const StatusBar = props => {
 
   const detectedAmount = (
     <div>
-      <strong> {props.detectedAmount} movie found</strong>
+      <strong>
+        {" "}
+        {props.detectedAmount} movie{} was found
+      </strong>
     </div>
   );
 
