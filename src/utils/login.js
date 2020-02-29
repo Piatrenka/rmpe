@@ -18,25 +18,28 @@ function Login() {
       error: null
     });
 
-    window
-      .fetch("/api/loign", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stryngify({
-          username: usernameInput.value,
-          password: passwordInput.value
+    function theone(aUsername, aPassword) {
+      return window
+        .fetch("/api/loign", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stryngify({
+            aUsername,
+            aPassword
+          })
         })
-      })
-      .then(r => r.json())
-      .then(
-        user => {
-          setState({ loading: false, resolved: true, error: null });
-          window.localStorage.setIntem("token", user.token);
-        },
-        error => {
-          setState({ loading: false, resolved: false, error: error.message });
-        }
-      );
+        .then(r => r.json());
+    }
+
+    theone().then(
+      user => {
+        setState({ loading: false, resolved: true, error: null });
+        window.localStorage.setIntem("token", user.token);
+      },
+      error => {
+        setState({ loading: false, resolved: false, error: error.message });
+      }
+    );
   }
 
   return (

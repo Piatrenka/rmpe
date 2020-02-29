@@ -30,7 +30,7 @@ function SearchRegion(props) {
             <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
           </select>
         </label>
-        <input type="button" value="Search" onClick={props.onSubmit} />
+        <input type="button" value="Submit" onClick={props.onSubmit} />
       </form>
     </div>
   );
