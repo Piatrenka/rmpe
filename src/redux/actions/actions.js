@@ -5,13 +5,14 @@
  */
 
 import { FETCH_MOVIES_START, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERR } from "./actionTypes"
+import axios from '../../utils/axios-movie'
 
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
 export function fetchMovies() {
   return async dispatch => {
     dispatch(fetchMoviesStart)
     try {
-      const response = await axiosMovie.get('/movies')
+      const response = await axios.get('/movies')
       const movies = []
       // console.log(response.data.data)
 
@@ -21,7 +22,7 @@ export function fetchMovies() {
 
       dispatch(fetchMoviesSuccess(movies))
     } catch (e) {
-      // console.log(e)
+      console.log(e)
       dispatch(fetchMoviesErr(e))
     }
   }

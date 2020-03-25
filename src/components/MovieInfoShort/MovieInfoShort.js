@@ -23,7 +23,7 @@ const MovieInfoShort = props => {
   const movieInfoShort = (
     <React.Fragment>
       <Card.Img
-        src={movie.poster}
+        src={movie.poster_path}
         onError={e => {
           e.target.onerror = null;
           e.target.src = posterNotFound;
@@ -31,8 +31,8 @@ const MovieInfoShort = props => {
       />
       <div className={styles.movie_card}>
         <p>{movie.title}</p>
-        <p>{movie.imdb.rating}</p>
-        <p>{movie.year}</p>
+        <p>{movie.vote_average}</p>
+        <p>{movie.release_date.substring(0, 4)}</p>
         <p>{movie.genres.join(", ")}</p>
       </div>
     </React.Fragment>
@@ -42,7 +42,7 @@ const MovieInfoShort = props => {
     <div
       className={styles.region}
       style={style}
-      onClick={e => props.onMovieClick(movie.imdb.id)}
+      onClick={e => props.onMovieClick(movie.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
       {/* {props.short ? movieInfoShort : movieInfo} */}

@@ -19,6 +19,9 @@ import MoviePage from "../MoviePage/MoviePage";
 // Just testing
 import HiddenMessage from "../../utils/hidden-message";
 
+import {connect} from 'react-redux'
+import {fetchMovies} from '../../redux/actions/actions'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -97,14 +100,17 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const movies = await getMovies(
-      this.state.searchQuery,
-      this.state.searchBy,
-      this.state.sortBy
-    );
-    this.setState({
-      movies
-    });
+
+    // const movies = await getMovies(
+    //   this.state.searchQuery,
+    //   this.state.searchBy,
+    //   this.state.sortBy
+    // );
+    // this.setState({
+    //   movies
+    // });
+
+    this.props.fetchMovies()
   }
 
   // componentDidMount() {
@@ -135,11 +141,11 @@ class App extends Component {
     // // получить фильм для отображения
     // let movie2Show = null;
     let movie2Show = [];
-    let movies2Show = this.state.movies;
+    let movies2Show = this.props.movies;
 
-    if (this.state.selectedMovieId) {
-      movie2Show = this.state.movies.find(movie => {
-        return movie.imdb.id === this.state.selectedMovieId;
+    if (this.props.selectedMovieId) {
+      movie2Show = this.props.movies.find(movie => {
+        return movie.id === this.props.selectedMovieId;
       });
     }
 
@@ -195,19 +201,20 @@ class App extends Component {
     // }
 
     let page;
-    if (!this.state.selectedMovieId) {
+    if (!this.props.selectedMovieId) {
       page = (
         <MoviesPage
           movies={movies2Show}
-          searchQuery={this.state.searchQuery}
-          searchBy={this.state.searchBy}
-          sortBy={this.state.sortBy}
-          detectedAmount={movies2Show.length}
-          onSearchQueryChange={this.handleSearchQueryChange}
-          onSearchModeChange={this.handleSearchModeChange}
-          onSortModeChange={this.handleSortModesClick}
-          onSubmit={this.handleSubmit}
-          onMovieClick={this.handleMovieClick}
+          searchQuery={this.props.searchQuery}
+          searchBy={this.props.searchBy}
+          sortBy={this.props.sortBy}
+          
+          // detectedAmount={movies2Show.length}
+          // onSearchQueryChange={this.handleSearchQueryChange}
+          // onSearchModeChange={this.handleSearchModeChange}
+          // onSortModeChange={this.handleSortModesClick}
+          // onSubmit={this.handleSubmit}
+          // onMovieClick={this.handleMovieClick}
         />
       );
     } else {
@@ -215,7 +222,7 @@ class App extends Component {
         <MoviePage
           movie={movie2Show}
           movies={movies2Show}
-          sortBy={this.state.sortBy}
+          sortBy={this.props.sortBy}
           detectedAmount={movies2Show.length}
           selectedMovieId={this.selectedMovieId}
           onReturn2MoviesClick={this.handleReturn2MoviesClick}
@@ -273,4 +280,21 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapState2Props(state) {
+  return {
+    movies: state.appReducer.movies,
+    searchQuery: state.appReducer.searchQuery,
+    searchBy: state.appReducer.searchBy,
+    sortBy: state.appReducer.sortBy,
+    selectedMovieId: state.appReducer.selectedMovieId,
+    loading: state.appReducer.loading
+  }
+}
+
+function mapDispatch2Props(dispatch) {
+  return {
+    fetchMovies: ()=> dispatch(fetchMovies())
+  }
+}
+
+export default connect(mapState2Props, mapDispatch2Props)(App);
