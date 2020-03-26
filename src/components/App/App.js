@@ -297,4 +297,8 @@ function mapDispatch2Props(dispatch) {
   }
 }
 
+// Лютейший, лютейший пипец, теперь, чтобы компонент понимал, как ему надо работать с центральным хранилищем store
+// его надо передать параметром в функцию connect, которую предоставляет модуль react-redux
+// функции connect нужны два параметра, оба функции, первой функции необходимо в качестве параметра состояние state
+// второй нужны методы dispatch из store
 export default connect(mapState2Props, mapDispatch2Props)(App);

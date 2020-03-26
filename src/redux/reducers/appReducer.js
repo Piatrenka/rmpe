@@ -10,7 +10,7 @@ const initialState = {
   loading: true
 }
 
-export default function addReducer(state = initialState, action) {
+export default function appReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_MOVIES_START:
       return {
