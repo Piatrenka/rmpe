@@ -110,7 +110,9 @@ class App extends Component {
     //   movies
     // });
 
-    this.props.fetchMovies()
+    // console.log(this.props.searchQuery, this.props.searchBy, this.props.sortBy);
+
+    this.props.fetchMovies(this.props.searchQuery, this.props.searchBy, this.props.sortBy)
   }
 
   // componentDidMount() {
@@ -293,7 +295,7 @@ function mapState2Props(state) {
 
 function mapDispatch2Props(dispatch) {
   return {
-    fetchMovies: ()=> dispatch(fetchMovies())
+    fetchMovies: (searchQuery, searchBy, sortBy)=> dispatch(fetchMovies(searchQuery, searchBy, sortBy))
   }
 }
 

@@ -3,7 +3,7 @@ import { FETCH_MOVIES_START, FETCH_MOVIES_ERR, FETCH_MOVIES_SUCCESS } from '../a
 
 const initialState = {
   movies: [],
-  searchQuery: "", // Строка поиска
+  searchQuery: "the", // Строка поиска
   searchBy: SearchModes.TITLE, // режим поиска
   sortBy: SortModes.RELEASED,  // режим сортировки
   selectedMovieId: null,

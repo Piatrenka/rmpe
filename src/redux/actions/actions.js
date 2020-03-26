@@ -8,11 +8,17 @@ import { FETCH_MOVIES_START, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_ERR } from "./ac
 import axios from '../../utils/axios-movie'
 
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
-export function fetchMovies() {
+export function fetchMovies(searchQuery, searchBy, sortBy) {
+  
+  console.log(searchQuery, searchBy, sortBy);
+
   return async dispatch => {
     dispatch(fetchMoviesStart)
     try {
-      const response = await axios.get('/movies')
+      // const response = await axios.get('/movies')
+      const response = await axios.get(
+        "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
+      );
       const movies = []
       // console.log(response.data.data)
 
