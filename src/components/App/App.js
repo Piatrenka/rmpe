@@ -20,7 +20,7 @@ import MoviePage from "../MoviePage/MoviePage";
 import HiddenMessage from "../../utils/hidden-message";
 
 import {connect} from 'react-redux'
-import {fetchMovies} from '../../redux/actions/actions'
+import {fetchMovies, updateSearchQuery, setSearchByMode} from '../../redux/actions/actions'
 
 class App extends Component {
   constructor(props) {
@@ -51,11 +51,11 @@ class App extends Component {
   };
 
   // обработчик изменения содержания строки поиска, передается в дочернюю компоненту для использования в ней
-  handleSearchQueryChange = searchQuery => {
-    this.setState({
-      searchQuery: searchQuery
-    });
-  };
+  // handleSearchQueryChange = searchQuery => {
+  //   this.setState({
+  //     searchQuery: searchQuery
+  //   });
+  // };
 
   // обработчик выбора режима поиска
   handleSearchModeChange = searchMode => {
@@ -210,6 +210,7 @@ class App extends Component {
           searchQuery={this.props.searchQuery}
           searchBy={this.props.searchBy}
           sortBy={this.props.sortBy}
+          loading={this.props.loading}
           
           // detectedAmount={movies2Show.length}
           // onSearchQueryChange={this.handleSearchQueryChange}
@@ -217,6 +218,10 @@ class App extends Component {
           // onSortModeChange={this.handleSortModesClick}
           // onSubmit={this.handleSubmit}
           // onMovieClick={this.handleMovieClick}
+          
+          onSearchQueryChange={this.props.updateSearchQuery}
+          onSearchModeChange={this.props.setSearchByMode}
+          onSubmit={this.props.fetchMovies}
         />
       );
     } else {
@@ -295,7 +300,10 @@ function mapState2Props(state) {
 
 function mapDispatch2Props(dispatch) {
   return {
-    fetchMovies: (searchQuery, searchBy, sortBy)=> dispatch(fetchMovies(searchQuery, searchBy, sortBy))
+    fetchMovies: (searchQuery, searchBy, sortBy)=> dispatch(fetchMovies(searchQuery, searchBy, sortBy)),
+    updateSearchQuery: searchQuery => dispatch(updateSearchQuery(searchQuery)),
+    setSearchByMode: searchBy => dispatch(setSearchByMode(searchBy)),
+    setSortByMode: sortBy => dispatch(setSortByMode(sortBy))
   }
 }
 

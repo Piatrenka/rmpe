@@ -17,12 +17,12 @@ function getNRandomWords(arr) {
 
 const SearchModes = {
   TITLE: "TITLE",
-  GENRE: "GENRE"
+  GENRE: "GENRES"
 };
 
 const SortModes = {
-  RELEASED: "RELEASED",
-  RATING: "RATING"
+  RELEASED: "RELEASE_DATE",
+  RATING: "VOTE_AVERAGE"
 };
 
 export { getRandomInt, getNRandomWords, SearchModes, SortModes };

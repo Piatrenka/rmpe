@@ -3,9 +3,10 @@ import styles from "./MoviesPage.css";
 import SearchRegion from "../SearchRegion/SearchRegion";
 import OutputRegion from "../OutputRegion/OutputRegion";
 import StatusBar from "../StatusBar/StatusBar";
+import Loader from "../UI/Loader/Loader"
 
 function MoviesPage(props) {
-  // console.log(props);
+  // console.log('MoviesPage Debug: ', props);
   return (
     <div className={styles.region}>
       {/* <h6>This is the MoviesPage Component</h6> */}
@@ -13,6 +14,7 @@ function MoviesPage(props) {
       <SearchRegion
         searchQuery={props.searchQuery}
         searchBy={props.searchBy}
+        sortBy={props.sortBy}
         onSearchQueryChange={props.onSearchQueryChange}
         onSearchModeChange={props.onSearchModeChange}
         onSubmit={props.onSubmit}
@@ -24,7 +26,11 @@ function MoviesPage(props) {
         detectedAmount={props.detectedAmount}
       />
 
-      <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
+      {props.loading || !props.movies ? (
+        <Loader />
+      ) : (
+        <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
+      )}
     </div>
   );
 }
