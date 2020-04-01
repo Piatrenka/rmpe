@@ -31,32 +31,32 @@ import {
 } from '../../redux/actions/actions'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      movies: [],
-      // isShowSearch: false,        // Режим ввода строки поиска, иначе показ кликнутого фильма
-      searchQuery: "", // Строка поиска
-      searchBy: SearchModes.TITLE, // Возможные варианты поиска 'TITLE', 'GENRE'
-      sortBy: SortModes.RELEASED, // Возможные варианты сортировки 'RELEASED', 'RATING'
-      selectedMovieId: null // "tt0012349" //null // getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
-    };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     movies: [],
+  //     // isShowSearch: false,        // Режим ввода строки поиска, иначе показ кликнутого фильма
+  //     searchQuery: "", // Строка поиска
+  //     searchBy: SearchModes.TITLE, // Возможные варианты поиска 'TITLE', 'GENRE'
+  //     sortBy: SortModes.RELEASED, // Возможные варианты сортировки 'RELEASED', 'RATING'
+  //     selectedMovieId: null // "tt0012349" //null // getRandomInt(Movies.length) // id фильма по клику, первый раз случайный, для поиска установить в null
+  //   };
 
-    // просто пипец, насколько отвратительная конструкция
-    // this.handleIsShowSearchClick = this.handleIsShowSearchClick.bind(this);
-    // this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
-    // this.handleSearchModeChange = this.handleSearchModeChange.bind(this);
-    // this.handleSortModesClick = this.handleSortModesClick.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleMovieClick = this.handleMovieClick.bind(this);
-  }
+  //   // просто пипец, насколько отвратительная конструкция
+  //   // this.handleIsShowSearchClick = this.handleIsShowSearchClick.bind(this);
+  //   // this.handleSearchQueryChange = this.handleSearchQueryChange.bind(this);
+  //   // this.handleSearchModeChange = this.handleSearchModeChange.bind(this);
+  //   // this.handleSortModesClick = this.handleSortModesClick.bind(this);
+  //   // this.handleSubmit = this.handleSubmit.bind(this);
+  //   // this.handleMovieClick = this.handleMovieClick.bind(this);
+  // }
 
   // обработчик для переключения показа содержимого региона между поиском и показом выбранной записи
-  handleReturn2MoviesClick = () => {
-    this.setState({
-      selectedMovieId: null
-    });
-  };
+  // handleReturn2MoviesClick = () => {
+  //   this.setState({
+  //     selectedMovieId: null
+  //   });
+  // };
 
   // обработчик изменения содержания строки поиска, передается в дочернюю компоненту для использования в ней
   // handleSearchQueryChange = searchQuery => {
@@ -66,46 +66,46 @@ class App extends Component {
   // };
 
   // обработчик выбора режима поиска
-  handleSearchModeChange = searchMode => {
-    this.setState({
-      searchBy: searchMode
-    });
-  };
+  // handleSearchModeChange = searchMode => {
+  //   this.setState({
+  //     searchBy: searchMode
+  //   });
+  // };
 
   // обработчик выбора режима сортировки
-  handleSortModesClick = sortMode => {
-    this.setState({
-      sortBy: sortMode
-    });
-  };
+  // handleSortModesClick = sortMode => {
+  //   this.setState({
+  //     sortBy: sortMode
+  //   });
+  // };
 
   // обработчик для кнопки поиска
-  handleSubmit = () => {
-    console.log(
-      `Button Search is clicked: [${this.state.searchQuery}], ${this.state.searchBy}, ${this.state.sortBy}`
-    );
-    getMovies(
-      this.state.searchQuery,
-      this.state.searchBy,
-      this.state.sortBy
-    ).then(movies => {
-      this.setState({
-        movies
-      });
-    });
-  };
+  // handleSubmit = () => {
+  //   console.log(
+  //     `Button Search is clicked: [${this.state.searchQuery}], ${this.state.searchBy}, ${this.state.sortBy}`
+  //   );
+  //   getMovies(
+  //     this.state.searchQuery,
+  //     this.state.searchBy,
+  //     this.state.sortBy
+  //   ).then(movies => {
+  //     this.setState({
+  //       movies
+  //     });
+  //   });
+  // };
 
-  handleMovieClick = id => {
-    // console.log(`${id} movie is clicked`);
-    // const i = this.state.movies.findIndex(movie => {
-    //   return movie.imdb.id === id;
-    // });
-    console.log(id);
+  // handleMovieClick = id => {
+  //   // console.log(`${id} movie is clicked`);
+  //   // const i = this.state.movies.findIndex(movie => {
+  //   //   return movie.imdb.id === id;
+  //   // });
+  //   console.log(id);
 
-    this.setState({
-      selectedMovieId: id
-    });
-  };
+  //   this.setState({
+  //     selectedMovieId: id
+  //   });
+  // };
 
   async componentDidMount() {
 
