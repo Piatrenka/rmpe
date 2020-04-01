@@ -20,7 +20,15 @@ import MoviePage from "../MoviePage/MoviePage";
 import HiddenMessage from "../../utils/hidden-message";
 
 import {connect} from 'react-redux'
-import {fetchMovies, updateSearchQuery, setSearchByMode, setSortByMode} from '../../redux/actions/actions'
+
+import {
+  fetchMovies, 
+  updateSearchQuery, 
+  setSearchByMode, 
+  setSortByMode, 
+  movieClick, 
+  return2Search
+} from '../../redux/actions/actions'
 
 class App extends Component {
   constructor(props) {
@@ -222,6 +230,7 @@ class App extends Component {
           onSearchQueryChange={this.props.updateSearchQuery}
           onSearchModeChange={this.props.setSearchByMode}
           onSortModeChange={this.props.setSortByMode}
+          onMovieClick={this.props.movieClick}
           onSubmit={this.props.fetchMovies}
         />
       );
@@ -233,9 +242,9 @@ class App extends Component {
           sortBy={this.props.sortBy}
           detectedAmount={movies2Show.length}
           selectedMovieId={this.selectedMovieId}
-          onReturn2MoviesClick={this.handleReturn2MoviesClick}
-          onSortModeChange={this.handleSortModesClick}
-          onMovieClick={this.handleMovieClick}
+          onReturn2MoviesClick={this.props.return2Search}
+          onSortModeChange={this.props.setSortByMode}
+          onMovieClick={this.props.movieClick}
         />
       );
     }
@@ -304,7 +313,10 @@ function mapDispatch2Props(dispatch) {
     fetchMovies: (searchQuery, searchBy, sortBy)=> dispatch(fetchMovies(searchQuery, searchBy, sortBy)),
     updateSearchQuery: searchQuery => dispatch(updateSearchQuery(searchQuery)),
     setSearchByMode: searchBy => dispatch(setSearchByMode(searchBy)),
-    setSortByMode: sortBy => dispatch(setSortByMode(sortBy))
+    setSortByMode: sortBy => dispatch(setSortByMode(sortBy)),
+    movieClick: id => dispatch(movieClick(id)),
+    return2Search: () => dispatch(return2Search())
+
   }
 }
 

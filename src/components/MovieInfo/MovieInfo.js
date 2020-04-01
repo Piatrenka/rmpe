@@ -6,7 +6,7 @@ import posterNotFound from "../../keep-calm-poster-not-found.png";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+// import Card from "react-bootstrap/Card";
 
 import Button from "react-bootstrap/Button";
 import Logo from "../Logo/Logo";
@@ -41,7 +41,7 @@ const MovieInfo = props => {
           <Col auto="true">
             <div className={styles.poster}>
               <img
-                src={movie.poster}
+                src={movie.poster_path}
                 onError={e => {
                   e.target.onerror = null;
                   e.target.src = posterNotFound;
@@ -55,14 +55,14 @@ const MovieInfo = props => {
                 <h2>{movie.title}</h2>
               </Col>
               <Col xs lg="1">
-                {movie.imdb.rating}
+                {movie.vote_average}
               </Col>
             </Row>
-            <Row>{movie.awards.text}</Row>
+            <Row>movie.awards.text</Row>
             <Row>
-              {movie.year} {movie.runtime} min
+              {movie.release_date.substring(0, 4)} {movie.runtime} min
             </Row>
-            <Row>{movie.plot}</Row>
+            <Row>{movie.overview}</Row>
           </Col>
         </Row>
       </Container>
@@ -83,7 +83,7 @@ const MovieInfo = props => {
     <div
       className={styles.region}
       style={style}
-      onClick={e => props.onMovieClick(movie.imdb.id)}
+      onClick={e => props.onMovieClick(movie.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
       {movieInfo}

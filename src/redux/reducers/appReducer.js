@@ -1,5 +1,5 @@
 import { SearchModes, SortModes, reorderMovies } from "../../utils/common";
-import { FETCH_MOVIES_START, FETCH_MOVIES_ERR, FETCH_MOVIES_SUCCESS, UPDATE_SEARCH_QUERY, SET_SEARCHBY_MODE, SET_SORTBY_MODE } from '../actions/actionTypes'
+import { FETCH_MOVIES_START, FETCH_MOVIES_ERR, FETCH_MOVIES_SUCCESS, UPDATE_SEARCH_QUERY, SET_SEARCHBY_MODE, SET_SORTBY_MODE, MOVIE_CLICK, RETURN_2_SEARCH } from '../actions/actionTypes'
 
 const initialState = {
   movies: [],
@@ -36,6 +36,14 @@ export default function appReducer(state = initialState, action) {
       const movies = reorderMovies(state.movies, action.sortBy)
       return {
         ...state, sortBy: action.sortBy, movies: movies
+      }
+    case MOVIE_CLICK:
+      return {
+        ...state, selectedMovieId: action.id
+      }    
+    case RETURN_2_SEARCH:
+      return {
+        ...state, selectedMovieId: null
       }  
     default:
       return state;
