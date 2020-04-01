@@ -18,14 +18,15 @@ export function fetchMovies(searchQuery, searchBy, sortBy) {
       // const response = await axios.get('/movies')
       const response = await axios.get(
         // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
-        `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+        // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+        `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
       );
       const movies = []
       
-      console.log(
-        `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-      );
-      console.log("response.data.data = ", response.data.data)
+      // console.log(
+      //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+      // );
+      // console.log("response.data.data = ", response.data.data)
 
       response.data.data.forEach(movie => {
         movies.push(movie)

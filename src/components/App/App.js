@@ -20,7 +20,7 @@ import MoviePage from "../MoviePage/MoviePage";
 import HiddenMessage from "../../utils/hidden-message";
 
 import {connect} from 'react-redux'
-import {fetchMovies, updateSearchQuery, setSearchByMode} from '../../redux/actions/actions'
+import {fetchMovies, updateSearchQuery, setSearchByMode, setSortByMode} from '../../redux/actions/actions'
 
 class App extends Component {
   constructor(props) {
@@ -221,6 +221,7 @@ class App extends Component {
           
           onSearchQueryChange={this.props.updateSearchQuery}
           onSearchModeChange={this.props.setSearchByMode}
+          onSortModeChange={this.props.setSortByMode}
           onSubmit={this.props.fetchMovies}
         />
       );

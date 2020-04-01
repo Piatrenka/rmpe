@@ -26,7 +26,7 @@ function MoviesPage(props) {
         detectedAmount={props.detectedAmount}
       />
 
-      {props.loading || !props.movies ? (
+      {props.loading ? (
         <Loader />
       ) : (
         <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />

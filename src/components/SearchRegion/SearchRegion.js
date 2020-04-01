@@ -9,7 +9,7 @@ function SearchRegion(props) {
   return (
     <div className={styles.region}>
       {/* <h6>This is SearchRegion Component</h6> */}
-      <form>
+      <form onSubmit={e => { e.preventDefault(); }}>
         <label>Find your movie</label>
         <input
           type="text"
