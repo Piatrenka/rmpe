@@ -219,6 +219,7 @@ class App extends Component {
           searchBy={this.props.searchBy}
           sortBy={this.props.sortBy}
           loading={this.props.loading}
+          detectedAmount={this.props.recordsTotal}
           
           // detectedAmount={movies2Show.length}
           // onSearchQueryChange={this.handleSearchQueryChange}
@@ -304,7 +305,8 @@ function mapState2Props(state) {
     searchBy: state.appReducer.searchBy,
     sortBy: state.appReducer.sortBy,
     selectedMovieId: state.appReducer.selectedMovieId,
-    loading: state.appReducer.loading
+    loading: state.appReducer.loading,
+    recordsTotal: state.appReducer.recordsTotal
   }
 }
 

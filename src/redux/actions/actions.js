@@ -41,7 +41,7 @@ export function fetchMovies(searchQuery, searchBy, sortBy) {
         movies.push(movie)
       })
 
-      dispatch(fetchMoviesSuccess(movies))
+      dispatch(fetchMoviesSuccess(movies, response.data.total))
     } catch (e) {
       console.log(e)
       dispatch(fetchMoviesErr(e))
@@ -56,10 +56,11 @@ export function fetchMoviesStart() {
   }
 }
 
-export function fetchMoviesSuccess(movies) {
+export function fetchMoviesSuccess(movies, recordsTotal) {
   return {
     type: FETCH_MOVIES_SUCCESS,
-    movies: movies
+    movies: movies,
+    recordsTotal: recordsTotal
   }
 }
 

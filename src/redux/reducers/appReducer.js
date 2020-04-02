@@ -3,6 +3,7 @@ import { FETCH_MOVIES_START, FETCH_MOVIES_ERR, FETCH_MOVIES_SUCCESS, UPDATE_SEAR
 
 const initialState = {
   movies: [],
+  recordsTotal: 0,
   searchQuery: "", // Строка поиска
   searchBy: SearchModes.TITLE, // режим поиска
   sortBy: SortModes.RATING,  // режим сортировки
@@ -18,7 +19,7 @@ export default function appReducer(state = initialState, action) {
       }
     case FETCH_MOVIES_SUCCESS:
       return {
-        ...state, loading: false, movies: action.movies
+        ...state, loading: false, movies: action.movies, recordsTotal: action.recordsTotal
       }
     case FETCH_MOVIES_ERR:
       return {
