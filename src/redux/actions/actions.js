@@ -15,6 +15,7 @@ import {
   RETURN_2_SEARCH
  } from "./actionTypes"
 import axios from '../../utils/axios-movie'
+import qs from 'qs'
 
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
 export function fetchMovies(searchQuery, searchBy, sortBy) {
@@ -25,16 +26,28 @@ export function fetchMovies(searchQuery, searchBy, sortBy) {
     dispatch(fetchMoviesStart)
     try {
       // const response = await axios.get('/movies')
+      
+      const query = qs.stringify({
+        sortBy: sortBy.toLowerCase(),
+        sortOrder: 'desc',
+        search: searchQuery,
+        searchBy: searchBy.toLowerCase()
+      })
+      const url = `/movies?${query}`
+
       const response = await axios.get(
         // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
         // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-        `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+        // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+        url
       );
       const movies = []
       
       // console.log(
       //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
       // );
+      // console.log(url)
+
       // console.log("response.data.data = ", response.data.data)
 
       response.data.data.forEach(movie => {

@@ -11,6 +11,7 @@ import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 // import RegionControl from "../RegionControl/RegionControl";
 // import StatusBar from "../StatusBar/StatusBar";
 // import OutputRegion from "../OutputRegion/OutputRegion";
+
 import Logo from "../Logo/Logo";
 
 import MoviesPage from "../MoviesPage/MoviesPage";
@@ -267,12 +268,12 @@ class App extends Component {
 
         {/* <Logo /> */}
 
-        <div>
+        {/* <div>
           <HiddenMessage>
             It ain't what you don't know that gets you into trouble. It's what
             you know for sure that just ain't so...
           </HiddenMessage>
-        </div>
+        </div> */}
 
         <ErrorBoundary>
           {page}
