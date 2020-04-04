@@ -16,13 +16,13 @@ function getNRandomWords(arr) {
 }
 
 const SearchModes = {
-  TITLE: "TITLE",
-  GENRE: "GENRES"
+  TITLE: "title",
+  GENRE: "genres"
 };
 
 const SortModes = {
-  RELEASED: "RELEASE_DATE",
-  RATING: "VOTE_AVERAGE"
+  RELEASED: "release_date",
+  RATING: "vote_average"
 };
 
 function reorderMovies(arr, sortBy) {

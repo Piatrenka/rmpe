@@ -23,15 +23,15 @@ export function fetchMovies(searchQuery, searchBy, sortBy) {
   console.log("fetchMovies Debug: ", searchQuery, searchBy, sortBy);
 
   return async dispatch => {
-    dispatch(fetchMoviesStart)
+    dispatch(fetchMoviesStart())
     try {
       // const response = await axios.get('/movies')
       
       const query = qs.stringify({
-        sortBy: sortBy.toLowerCase(),
+        sortBy: sortBy,
         sortOrder: 'desc',
         search: searchQuery,
-        searchBy: searchBy.toLowerCase()
+        searchBy: searchBy
       })
       const url = `/movies?${query}`
 
