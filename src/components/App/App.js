@@ -121,7 +121,7 @@ class App extends Component {
 
     // console.log(this.props.searchQuery, this.props.searchBy, this.props.sortBy);
 
-    this.props.fetchMovies(this.props.searchQuery, this.props.searchBy, this.props.sortBy)
+    this.props.fetchMovies()
   }
 
   // componentDidMount() {
