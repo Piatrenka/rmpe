@@ -1,30 +1,36 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./MoviesPage.css";
 import SearchRegion from "../SearchRegion/SearchRegion";
 import OutputRegion from "../OutputRegion/OutputRegion";
 import StatusBar from "../StatusBar/StatusBar";
+import Loader from "../UI/Loader/Loader"
 
 function MoviesPage(props) {
-  // console.log(props);
+  // console.log('MoviesPage Debug: ', props);
   return (
     <div className={styles.region}>
       {/* <h6>This is the MoviesPage Component</h6> */}
 
       <SearchRegion
-        searchQuery={props.searchQuery}
-        searchBy={props.searchBy}
-        onSearchQueryChange={props.onSearchQueryChange}
-        onSearchModeChange={props.onSearchModeChange}
-        onSubmit={props.onSubmit}
+        // searchQuery={props.searchQuery}
+        // searchBy={props.searchBy}
+        // sortBy={props.sortBy}
+        // onSearchQueryChange={props.onSearchQueryChange}
+        // onSearchModeChange={props.onSearchModeChange}
+        // onSubmit={props.onSubmit}
       />
 
       <StatusBar
-        sortBy={props.sortBy}
-        onSortModeChange={props.onSortModeChange}
-        detectedAmount={props.detectedAmount}
+        // sortBy={props.sortBy}
+        // onSortModeChange={props.onSortModeChange}
+        // detectedAmount={props.detectedAmount}
       />
 
-      <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
+      {props.loading ? (
+        <Loader />
+      ) : (
+        <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
+      )}
     </div>
   );
 }

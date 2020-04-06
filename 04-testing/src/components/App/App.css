@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  border: 1px solid white;
+  margin: 10px;
+  background-color: black;
+}
+
+h1 {
+  color: whitesmoke;
+}
+
+p {
+  color: rgb(163, 163, 163);
+}

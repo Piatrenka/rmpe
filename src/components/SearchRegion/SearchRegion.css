@@ -1,4 +1,28 @@
 .region {
   /* border: 1px solid #424242; */
-  margin: 20px;
+  margin: 40px;
+}
+
+.SearchRegion {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  flex-grow: 1;
+  width: 100%;
+  background: linear-gradient(90deg, #110e27 0%, #473d88 100%);
+}
+
+.SearchRegion > div {
+  width: 100%;
+  max-width: 700px;
+  padding: 0 80px;
+
+}
+
+.SearchRegion form {
+  background: #eee;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+  padding: 30px;
+  border-radius: 5px;
 }

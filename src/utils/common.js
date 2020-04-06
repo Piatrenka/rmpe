@@ -16,13 +16,44 @@ function getNRandomWords(arr) {
 }
 
 const SearchModes = {
-  TITLE: "TITLE",
-  GENRE: "GENRE"
+  TITLE: "title",
+  GENRE: "genres"
 };
 
 const SortModes = {
-  RELEASED: "RELEASED",
-  RATING: "RATING"
+  RELEASED: "release_date",
+  RATING: "vote_average"
 };
 
-export { getRandomInt, getNRandomWords, SearchModes, SortModes };
+function reorderMovies(arr, sortBy) {
+  const movies = arr.slice();
+
+  // сортировка по условию
+  if (sortBy === SortModes.RATING) {
+    movies.sort(function(a, b) {
+      if (a.vote_average < b.vote_average) {
+        return 1;
+      }
+      if (a.vote_average > b.vote_average) {
+        return -1;
+      }
+      return 0;
+    });
+  } else if (sortBy === SortModes.RELEASED) {
+    movies.sort(function(a, b) {
+      if (a.release_date < b.release_date) {
+        return 1;
+      }
+      if (a.release_date > b.release_date) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  return movies
+
+}
+
+
+export { getRandomInt, getNRandomWords, SearchModes, SortModes, reorderMovies };

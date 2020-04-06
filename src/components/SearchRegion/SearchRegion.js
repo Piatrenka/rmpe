@@ -1,39 +1,76 @@
-import React from "react";
+import React, { Component } from "react";
 import styles from "./SearchRegion.css";
 
 import { SearchModes } from "../../utils/common";
 
-function SearchRegion(props) {
-  // console.log(props);
+import {connect} from 'react-redux'
 
-  return (
-    <div className={styles.region}>
-      {/* <h6>This is SearchRegion Component</h6> */}
-      <form>
-        <label>Find your movie</label>
-        <input
-          type="text"
-          value={props.searchQuery}
-          onChange={e => {
-            props.onSearchQueryChange(e.target.value);
-          }}
-        />
-        <label>
-          Search By
-          <select
-            value={props.searchBy}
-            onChange={e => {
-              props.onSearchModeChange(e.target.value);
+import {
+  fetchMovies,
+  updateSearchQuery,
+  setSearchByMode
+} from "../../redux/actions/actions";
+
+
+
+class SearchRegion extends Component {
+  // console.log(props);
+  render() {
+    return (
+      <div className={styles.SearchRegion}>
+        {/* <h6>This is SearchRegion Component</h6> */}
+        <div>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
             }}
           >
-            <option value={SearchModes.TITLE}>{SearchModes.TITLE}</option>
-            <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
-          </select>
-        </label>
-        <input type="button" value="Search" onClick={props.onSubmit} />
-      </form>
-    </div>
-  );
+            <label>Find your movie</label>
+            <input
+              type="text"
+              value={this.props.searchQuery}
+              onChange={e => {
+                this.props.updateSearchQuery(e.target.value);
+              }}
+            />
+            <label>
+              Search By
+              <select
+                value={this.props.searchBy}
+                onChange={e => {
+                  this.props.setSearchByMode(e.target.value);
+                }}
+              >
+                <option value={SearchModes.TITLE}>{SearchModes.TITLE}</option>
+                <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
+              </select>
+            </label>
+            <input
+              type="button"
+              value="Submit"
+              onClick={() => this.props.fetchMovies()}
+            />
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default SearchRegion;
+function mapState2Props(state) {
+  return {
+    searchQuery: state.appReducer.searchQuery,
+    searchBy: state.appReducer.searchBy
+  };
+}
+
+function mapDispatch2Props(dispatch) {
+return {
+  fetchMovies: ()=> dispatch(fetchMovies()),
+  updateSearchQuery: searchQuery => dispatch(updateSearchQuery(searchQuery)),
+  setSearchByMode: searchBy => dispatch(setSearchByMode(searchBy))
+}
+
+}
+
+export default connect(mapState2Props, mapDispatch2Props)(SearchRegion);
