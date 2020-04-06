@@ -41,7 +41,7 @@ export function fetchMovies() {
         // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
         url
       );
-      const movies = []
+      const movies = response.data.data
       
       // console.log(
       //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
@@ -50,9 +50,9 @@ export function fetchMovies() {
 
       // console.log("response.data.data = ", response.data.data)
 
-      response.data.data.forEach(movie => {
-        movies.push(movie)
-      })
+      // response.data.data.forEach(movie => {
+      //   movies.push(movie)
+      // })
 
       dispatch(fetchMoviesSuccess(movies, response.data.total))
     } catch (e) {
