@@ -1,5 +1,14 @@
 import { SearchModes, SortModes, reorderMovies } from "../../utils/common";
-import { FETCH_MOVIES_START, FETCH_MOVIES_ERR, FETCH_MOVIES_SUCCESS, UPDATE_SEARCH_QUERY, SET_SEARCHBY_MODE, SET_SORTBY_MODE, MOVIE_CLICK, RETURN_2_SEARCH } from '../actions/actionTypes'
+import { 
+  FETCH_MOVIES_START, 
+  FETCH_MOVIES_ERR, 
+  FETCH_MOVIES_SUCCESS, 
+  UPDATE_SEARCH_QUERY, 
+  SET_SEARCHBY_MODE, 
+  SET_SORTBY_MODE, 
+  MOVIE_CLICK, 
+  RETURN_2_SEARCH 
+} from '../actions/actionTypes'
 
 const initialState = {
   movies: [],

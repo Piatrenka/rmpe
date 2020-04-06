@@ -18,21 +18,21 @@ import axios from '../../utils/axios-movie'
 import qs from 'qs'
 
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
-export function fetchMovies(searchQuery, searchBy, sortBy) {
+export function fetchMovies() {
   
-  console.log("fetchMovies Debug: ", searchQuery, searchBy, sortBy);
+  // console.log("fetchMovies Debug: ", searchQuery, searchBy, sortBy);
 
-  return async dispatch => {
+  return async (dispatch, getState) => {
     dispatch(fetchMoviesStart())
     try {
       // const response = await axios.get('/movies')
       
       const query = qs.stringify({
-        sortBy: sortBy,
-        sortOrder: 'desc',
-        search: searchQuery,
-        searchBy: searchBy
-      })
+        sortBy: getState().appReducer.sortBy,
+        sortOrder: "desc",
+        search: getState().appReducer.searchQuery,
+        searchBy: getState().appReducer.searchBy
+      });
       const url = `/movies?${query}`
 
       const response = await axios.get(

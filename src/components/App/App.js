@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styles from "./App.css";
 
-import { SearchModes, SortModes } from "../../utils/common";
+// import { SearchModes, SortModes } from "../../utils/common";
 
 // import Movies from "../../assets/Movies";
-import { getMovie, getMovies } from "../../utils/api";
+// import { getMovie, getMovies } from "../../utils/api";
 
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
@@ -18,7 +18,7 @@ import MoviesPage from "../MoviesPage/MoviesPage";
 import MoviePage from "../MoviePage/MoviePage";
 
 // Just testing
-import HiddenMessage from "../../utils/hidden-message";
+// import HiddenMessage from "../../utils/hidden-message";
 
 import {connect} from 'react-redux'
 
@@ -233,7 +233,7 @@ class App extends Component {
           onSearchModeChange={this.props.setSearchByMode}
           onSortModeChange={this.props.setSortByMode}
           onMovieClick={this.props.movieClick}
-          onSubmit={this.props.fetchMovies}
+          // onSubmit={this.props.fetchMovies}
         />
       );
     } else {
@@ -313,7 +313,7 @@ function mapState2Props(state) {
 
 function mapDispatch2Props(dispatch) {
   return {
-    fetchMovies: (searchQuery, searchBy, sortBy)=> dispatch(fetchMovies(searchQuery, searchBy, sortBy)),
+    fetchMovies: ()=> dispatch(fetchMovies()),
     updateSearchQuery: searchQuery => dispatch(updateSearchQuery(searchQuery)),
     setSearchByMode: searchBy => dispatch(setSearchByMode(searchBy)),
     setSortByMode: sortBy => dispatch(setSortByMode(sortBy)),

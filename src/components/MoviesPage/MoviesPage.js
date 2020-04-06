@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./MoviesPage.css";
 import SearchRegion from "../SearchRegion/SearchRegion";
 import OutputRegion from "../OutputRegion/OutputRegion";
@@ -12,12 +12,12 @@ function MoviesPage(props) {
       {/* <h6>This is the MoviesPage Component</h6> */}
 
       <SearchRegion
-        searchQuery={props.searchQuery}
-        searchBy={props.searchBy}
-        sortBy={props.sortBy}
-        onSearchQueryChange={props.onSearchQueryChange}
-        onSearchModeChange={props.onSearchModeChange}
-        onSubmit={props.onSubmit}
+        // searchQuery={props.searchQuery}
+        // searchBy={props.searchBy}
+        // sortBy={props.sortBy}
+        // onSearchQueryChange={props.onSearchQueryChange}
+        // onSearchModeChange={props.onSearchModeChange}
+        // onSubmit={props.onSubmit}
       />
 
       <StatusBar
