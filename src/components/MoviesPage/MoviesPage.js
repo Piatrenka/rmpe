@@ -21,9 +21,9 @@ function MoviesPage(props) {
       />
 
       <StatusBar
-        sortBy={props.sortBy}
-        onSortModeChange={props.onSortModeChange}
-        detectedAmount={props.detectedAmount}
+        // sortBy={props.sortBy}
+        // onSortModeChange={props.onSortModeChange}
+        // detectedAmount={props.detectedAmount}
       />
 
       {props.loading ? (
