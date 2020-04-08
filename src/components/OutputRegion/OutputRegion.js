@@ -5,13 +5,13 @@ import MoviesNotFound from "../MoviesNotFound/MoviesNotFound";
 import MoviesRelated from "../MoviesRelated/MoviesRelated";
 
 import {connect} from 'react-redux'
-import { movieClick } from "../../redux/actions/actions";
+// import { movieClick } from "../../redux/actions/actions";
 
 const OutputRegion = props => {
   let comp;
 
   if (props.movies.length > 0) {
-    comp = <Movies movies={props.movies} onMovieClick={props.onMovieClick} />;
+    comp = <Movies />;
   } else {
     comp = <MoviesNotFound />;
   }
@@ -31,9 +31,10 @@ function mapState2Props(state) {
   }
 }
 
-function mapDispatch2Props(dispatch) {
-  return {
-    onMovieClick: id => dispatch(movieClick(id))
-  }
-}
-export default connect(mapState2Props, mapDispatch2Props)(OutputRegion);
+// function mapDispatch2Props(dispatch) {
+//   return {
+//     onMovieClick: id => dispatch(movieClick(id))
+//   }
+// }
+
+export default connect(mapState2Props, null)(OutputRegion);

@@ -11,10 +11,18 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Logo from "../Logo/Logo";
 
+import {connect} from 'react-redux'
+import { return2Search } from "../../redux/actions/actions";
+
 const MovieInfo = props => {
   // console.log(props);
 
-  const movie = props.movie;
+  // const movie = props.movie;
+  let movie = null
+  movie = props.movies.find(movie => {
+    return movie.id === props.selectedMovieId;
+  });
+
 
   const movieInfo = (
     <React.Fragment>
@@ -83,7 +91,7 @@ const MovieInfo = props => {
     <div
       className={styles.region}
       style={style}
-      onClick={e => props.onMovieClick(movie.id)}
+      // onClick={e => props.onMovieClick(movie.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
       {movieInfo}
@@ -91,5 +99,18 @@ const MovieInfo = props => {
   );
 };
 
-export default Radium(MovieInfo);
-// export default MovieInfo;
+function mapState2Props(state) {
+  return {
+    movies: state.appReducer.movies,
+    selectedMovieId: state.appReducer.selectedMovieId
+  };
+}
+
+function mapDispatch2Props(dispatch) {
+  return {
+    onReturn2MoviesClick: () => dispatch(return2Search())
+  };
+}
+
+// export default Radium(MovieInfo);
+export default connect(mapState2Props, mapDispatch2Props)(MovieInfo);

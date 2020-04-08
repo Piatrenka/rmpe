@@ -151,14 +151,15 @@ class App extends Component {
 
     // // получить фильм для отображения
     // let movie2Show = null;
-    let movie2Show = [];
-    let movies2Show = this.props.movies;
 
-    if (this.props.selectedMovieId) {
-      movie2Show = this.props.movies.find(movie => {
-        return movie.id === this.props.selectedMovieId;
-      });
-    }
+    // let movie2Show = [];
+    // let movies2Show = this.props.movies;
+
+    // if (this.props.selectedMovieId) {
+    //   movie2Show = this.props.movies.find(movie => {
+    //     return movie.id === this.props.selectedMovieId;
+    //   });
+    // }
 
     // // получить фильмы для отображения
     // const movies2Show = this.state.movies.filter(movie => {
@@ -239,14 +240,14 @@ class App extends Component {
     } else {
       page = (
         <MoviePage
-          movie={movie2Show}
-          movies={movies2Show}
-          sortBy={this.props.sortBy}
-          detectedAmount={movies2Show.length}
-          selectedMovieId={this.selectedMovieId}
-          onReturn2MoviesClick={this.props.return2Search}
-          onSortModeChange={this.props.setSortByMode}
-          onMovieClick={this.props.movieClick}
+          // movie={movie2Show}
+          // movies={movies2Show}
+          // sortBy={this.props.sortBy}
+          // detectedAmount={movies2Show.length}
+          // selectedMovieId={this.selectedMovieId}
+          // onReturn2MoviesClick={this.props.return2Search}
+          // onSortModeChange={this.props.setSortByMode}
+          // onMovieClick={this.props.movieClick}
         />
       );
     }
@@ -302,23 +303,23 @@ class App extends Component {
 function mapState2Props(state) {
   return {
     movies: state.appReducer.movies,
-    searchQuery: state.appReducer.searchQuery,
-    searchBy: state.appReducer.searchBy,
-    sortBy: state.appReducer.sortBy,
+    // searchQuery: state.appReducer.searchQuery,
+    // searchBy: state.appReducer.searchBy,
+    // sortBy: state.appReducer.sortBy,
     selectedMovieId: state.appReducer.selectedMovieId,
-    loading: state.appReducer.loading,
-    recordsTotal: state.appReducer.recordsTotal
+    // loading: state.appReducer.loading,
+    // recordsTotal: state.appReducer.recordsTotal
   }
 }
 
 function mapDispatch2Props(dispatch) {
   return {
-    fetchMovies: ()=> dispatch(fetchMovies()),
-    updateSearchQuery: searchQuery => dispatch(updateSearchQuery(searchQuery)),
-    setSearchByMode: searchBy => dispatch(setSearchByMode(searchBy)),
-    setSortByMode: sortBy => dispatch(setSortByMode(sortBy)),
-    movieClick: id => dispatch(movieClick(id)),
-    return2Search: () => dispatch(return2Search())
+    fetchMovies: ()=> dispatch(fetchMovies())
+    // updateSearchQuery: searchQuery => dispatch(updateSearchQuery(searchQuery)),
+    // setSearchByMode: searchBy => dispatch(setSearchByMode(searchBy)),
+    // setSortByMode: sortBy => dispatch(setSortByMode(sortBy)),
+    // movieClick: id => dispatch(movieClick(id)),
+    // return2Search: () => dispatch(return2Search())
 
   }
 }

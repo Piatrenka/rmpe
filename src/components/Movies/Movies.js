@@ -5,6 +5,10 @@ import MovieInfoShort from "../MovieInfoShort/MovieInfoShort";
 
 import { Container, Row, Col, Card } from "react-bootstrap";
 
+import {connect} from 'react-redux'
+import { movieClick } from "../../redux/actions/actions";
+
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 const Movies = props => {
@@ -38,4 +42,16 @@ const Movies = props => {
   );
 };
 
-export default Movies;
+function mapState2Props(state) {
+  return {
+    movies: state.appReducer.movies
+  }
+}
+
+function mapDispatch2Props(dispatch) {
+  return {
+    onMovieClick: id => dispatch(movieClick(id))
+  }
+}
+
+export default connect(mapState2Props, mapDispatch2Props)(Movies);

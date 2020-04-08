@@ -22,9 +22,9 @@ const SelectedRegion = props => {
     <div className={styles.region}>
       {/* <h6>This is SelectedRegion Component</h6> */}
       <MovieInfo 
-        movie={props.movie} 
-        onMovieClick={() => {}} 
-        onReturn2MoviesClick={props.onReturn2MoviesClick}
+        // movie={props.movie} 
+        // onMovieClick={() => {}} 
+        // onReturn2MoviesClick={props.onReturn2MoviesClick}
       />
     </div>
   );
