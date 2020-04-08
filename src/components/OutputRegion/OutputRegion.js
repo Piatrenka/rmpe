@@ -4,6 +4,9 @@ import Movies from "../Movies/Movies";
 import MoviesNotFound from "../MoviesNotFound/MoviesNotFound";
 import MoviesRelated from "../MoviesRelated/MoviesRelated";
 
+import {connect} from 'react-redux'
+import { movieClick } from "../../redux/actions/actions";
+
 const OutputRegion = props => {
   let comp;
 
@@ -22,4 +25,15 @@ const OutputRegion = props => {
   );
 };
 
-export default OutputRegion;
+function mapState2Props(state) {
+  return {
+    movies: state.appReducer.movies
+  }
+}
+
+function mapDispatch2Props(dispatch) {
+  return {
+    onMovieClick: id => dispatch(movieClick(id))
+  }
+}
+export default connect(mapState2Props, mapDispatch2Props)(OutputRegion);

@@ -215,12 +215,12 @@ class App extends Component {
     if (!this.props.selectedMovieId) {
       page = (
         <MoviesPage
-          movies={movies2Show}
-          searchQuery={this.props.searchQuery}
-          searchBy={this.props.searchBy}
-          sortBy={this.props.sortBy}
-          loading={this.props.loading}
-          detectedAmount={this.props.recordsTotal}
+          // movies={movies2Show}
+          // searchQuery={this.props.searchQuery}
+          // searchBy={this.props.searchBy}
+          // sortBy={this.props.sortBy}
+          // loading={this.props.loading}
+          // detectedAmount={this.props.recordsTotal}
           
           // detectedAmount={movies2Show.length}
           // onSearchQueryChange={this.handleSearchQueryChange}
@@ -229,10 +229,10 @@ class App extends Component {
           // onSubmit={this.handleSubmit}
           // onMovieClick={this.handleMovieClick}
           
-          onSearchQueryChange={this.props.updateSearchQuery}
-          onSearchModeChange={this.props.setSearchByMode}
-          onSortModeChange={this.props.setSortByMode}
-          onMovieClick={this.props.movieClick}
+          // onSearchQueryChange={this.props.updateSearchQuery}
+          // onSearchModeChange={this.props.setSearchByMode}
+          // onSortModeChange={this.props.setSortByMode}
+          // onMovieClick={this.props.movieClick}
           // onSubmit={this.props.fetchMovies}
         />
       );

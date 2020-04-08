@@ -5,6 +5,8 @@ import OutputRegion from "../OutputRegion/OutputRegion";
 import StatusBar from "../StatusBar/StatusBar";
 import Loader from "../UI/Loader/Loader"
 
+import {connect} from 'react-redux'
+
 function MoviesPage(props) {
   // console.log('MoviesPage Debug: ', props);
   return (
@@ -29,10 +31,16 @@ function MoviesPage(props) {
       {props.loading ? (
         <Loader />
       ) : (
-        <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
+        <OutputRegion />
       )}
     </div>
   );
 }
 
-export default MoviesPage;
+function mapState2Props(state) {
+  return {
+    loading: state.appReducer.loading
+  }
+}
+
+export default connect(mapState2Props, null)(MoviesPage);

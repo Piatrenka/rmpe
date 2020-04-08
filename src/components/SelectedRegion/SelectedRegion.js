@@ -2,13 +2,14 @@ import React from "react";
 import styles from "./SelectedRegion.css";
 import MovieInfo from "../MovieInfo/MovieInfo";
 
-import Button from "react-bootstrap/Button";
-import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form"
-import "bootstrap/dist/css/bootstrap.min.css";
+// import Button from "react-bootstrap/Button";
+// import Navbar from "react-bootstrap/Navbar";
+// import Form from "react-bootstrap/Form"
+
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 
-import Logo from "../Logo/Logo";
+// import Logo from "../Logo/Logo";
 
 const SelectedRegion = props => {
   // console.log(props)

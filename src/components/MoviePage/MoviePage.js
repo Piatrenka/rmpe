@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./MoviePage.css";
 import SelectedRegion from "../SelectedRegion/SelectedRegion";
 import OutputRegion from "../OutputRegion/OutputRegion";
@@ -17,12 +17,14 @@ function MoviePage(props) {
       />
 
       <StatusBar
-        sortBy={props.sortBy}
-        onSortModeChange={props.onSortModeChange}
-        detectedAmount={props.detectedAmount}
+        // sortBy={props.sortBy}
+        // onSortModeChange={props.onSortModeChange}
+        // detectedAmount={props.detectedAmount}
       />
 
-      <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
+      <OutputRegion 
+        // movies={props.movies} onMovieClick={props.onMovieClick} 
+      />
     </div>
   );
 }

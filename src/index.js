@@ -35,7 +35,8 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(
 
 const data = {
   company: "Vebkomas",
-  created: new Date()
+  created: new Date(),
+  motto: "It ain't what you don't know that gets you into trouble, it's what you know for sure that just ain't so..."
 };
 
 const app = (
