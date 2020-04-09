@@ -5,6 +5,8 @@ import posterNotFound from "../../keep-calm-poster-not-found.png";
 
 import Card from "react-bootstrap/Card";
 
+import {Link} from 'react-router-dom'
+
 const MovieInfoShort = props => {
   // console.log(props);
 
@@ -39,15 +41,17 @@ const MovieInfoShort = props => {
   );
 
   return (
-    <div
-      className={styles.region}
-      style={style}
-      onClick={e => props.onMovieClick(movie.id)}
-    >
-      {/* <h6>This is the MovieInfo component</h6> */}
-      {/* {props.short ? movieInfoShort : movieInfo} */}
-      {movieInfoShort}
-    </div>
+    <Link to='/film'>
+      <div
+        className={styles.region}
+        style={style}
+        onClick={e => props.onMovieClick(movie.id)}
+      >
+        {/* <h6>This is the MovieInfo component</h6> */}
+        {/* {props.short ? movieInfoShort : movieInfo} */}
+        {movieInfoShort}
+      </div>
+    </Link>
   );
 };
 

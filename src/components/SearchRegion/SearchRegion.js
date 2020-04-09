@@ -11,6 +11,7 @@ import {
   setSearchByMode
 } from "../../redux/actions/actions";
 
+import { Link } from 'react-router-dom'
 
 
 class SearchRegion extends Component {
@@ -45,11 +46,13 @@ class SearchRegion extends Component {
                 <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
               </select>
             </label>
-            <input
-              type="button"
-              value="Submit"
-              onClick={() => this.props.fetchMovies()}
-            />
+            <Link to='/movies'>
+              <input
+                type="button"
+                value="Submit"
+                onClick={() => this.props.fetchMovies()}
+              />
+            </Link>
           </form>
         </div>
       </div>

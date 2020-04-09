@@ -14,6 +14,8 @@ import Logo from "../Logo/Logo";
 import {connect} from 'react-redux'
 import { return2Search } from "../../redux/actions/actions";
 
+import {Link} from 'react-router-dom'
+
 const MovieInfo = props => {
   // console.log(props);
 
@@ -36,12 +38,14 @@ const MovieInfo = props => {
               style={{ marginTop: "10px" }}
               className="d-flex justify-content-end"
             >
-              <Button
-                variant="outline-light"
-                onClick={props.onReturn2MoviesClick}
-              >
-                Return to search
-              </Button>
+              <Link to='/movies'>
+                <Button
+                  variant="outline-light"
+                  onClick={props.onReturn2MoviesClick}
+                >
+                  Return to search
+                </Button>
+              </Link>
             </div>
           </Col>
         </Row>

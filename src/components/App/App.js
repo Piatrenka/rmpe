@@ -16,19 +16,22 @@ import Logo from "../Logo/Logo";
 
 import MoviesPage from "../MoviesPage/MoviesPage";
 import MoviePage from "../MoviePage/MoviePage";
+import SearchRegion from '../SearchRegion/SearchRegion'
 
 // Just testing
 // import HiddenMessage from "../../utils/hidden-message";
 
 import {connect} from 'react-redux'
 
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+
 import {
-  fetchMovies, 
-  updateSearchQuery, 
-  setSearchByMode, 
-  setSortByMode, 
-  movieClick, 
-  return2Search
+  fetchMovies 
+  // updateSearchQuery, 
+  // setSearchByMode, 
+  // setSortByMode, 
+  // movieClick, 
+  // return2Search
 } from '../../redux/actions/actions'
 
 class App extends Component {
@@ -277,22 +280,13 @@ class App extends Component {
         </div> */}
 
         <ErrorBoundary>
-          {page}
-          {/* <RegionControl
-            state={this.state}
-            onClick={this.handleIsShowSearchClick}
-            onSearchQueryChange={this.handleSearchQueryChange}
-            onSearchModeChange={this.handleSearchModeChange}
-            onSubmit={this.handleSubmit}
-          />
-
-          <StatusBar
-            state={this.state}
-            onClick={this.handleSortModesClick}
-            detectedAmount={movies2Show.length}
-          />
-
-          <OutputRegion movies={movies2Show} onClick={this.handleMovieClick} /> */}
+          {/* {page} */}
+          <Router>
+            <Route path='/' exact render={() => (<Redirect to='/search' />)} />
+            <Route path='/movies' component={MoviesPage} />
+            <Route path='/film' component={MoviePage} />
+            <Route path='/search' component={SearchRegion} />
+          </Router>
         </ErrorBoundary>
         <Logo />
       </div>
