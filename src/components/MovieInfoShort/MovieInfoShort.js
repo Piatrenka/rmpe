@@ -41,7 +41,7 @@ const MovieInfoShort = props => {
   );
 
   return (
-    <Link to='/film'>
+    <Link to={`/film/${movie.id}`}>
       <div
         className={styles.region}
         style={style}

@@ -282,10 +282,16 @@ class App extends Component {
         <ErrorBoundary>
           {/* {page} */}
           <Router>
-            <Route path='/' exact render={() => (<Redirect to='/search' />)} />
-            <Route path='/movies' component={MoviesPage} />
-            <Route path='/film' component={MoviePage} />
-            <Route path='/search' component={SearchRegion} />
+            <Switch>
+              <Route path='/' exact render={() => (<Redirect to='/search' />)} />
+              <Route path='/movies' component={MoviesPage} />
+              <Route path={`/film/:${this.props.selectedMovieId}`} component={MoviePage} />
+              <Route path='/search' component={SearchRegion} />
+              <Route render={(match) => {
+                // console.log('match', match)
+                return (<div>{`Page Not Found: ${match.location.pathname}`}</div>)
+                }}/>
+            </Switch>
           </Router>
         </ErrorBoundary>
         <Logo />
