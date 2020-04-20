@@ -16,8 +16,10 @@ import { return2Search } from "../../redux/actions/actions";
 
 import {Link} from 'react-router-dom'
 
+import Loader from "../UI/Loader/Loader";
+
 const MovieInfo = props => {
-  // console.log(props);
+  console.log('MovieInfo Debug: props> ', props);
 
   // const movie = props.movie;
   let movie = null
@@ -98,7 +100,9 @@ const MovieInfo = props => {
       // onClick={e => props.onMovieClick(movie.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
-      {movieInfo}
+      {props.movies.length === 0 ? <Loader /> : {movieInfo}}
+
+      {/* {movieInfo} */}
     </div>
   );
 };

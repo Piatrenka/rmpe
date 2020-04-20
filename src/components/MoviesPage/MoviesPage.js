@@ -1,46 +1,50 @@
-import React from "react";
+import React, {Component} from "react";
 import styles from "./MoviesPage.css";
 import SearchRegion from "../SearchRegion/SearchRegion";
 import OutputRegion from "../OutputRegion/OutputRegion";
 import StatusBar from "../StatusBar/StatusBar";
-import Loader from "../UI/Loader/Loader"
+import Loader from "../UI/Loader/Loader";
 
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-function MoviesPage(props) {
-  // console.log('MoviesPage Debug: ', props);
-  return (
-    <div className={styles.region}>
-      {/* <h6>This is the MoviesPage Component</h6> */}
+import { fetchMovies } from "../../redux/actions/actions";
 
-      <SearchRegion
-        // searchQuery={props.searchQuery}
-        // searchBy={props.searchBy}
-        // sortBy={props.sortBy}
-        // onSearchQueryChange={props.onSearchQueryChange}
-        // onSearchModeChange={props.onSearchModeChange}
-        // onSubmit={props.onSubmit}
-      />
+import {useRouteMatch, useParams} from 'react-router-dom'
 
-      <StatusBar
-        // sortBy={props.sortBy}
-        // onSortModeChange={props.onSortModeChange}
-        // detectedAmount={props.detectedAmount}
-      />
+class MoviesPage extends Component {
+  async componentDidMount() {
+    
+    console.log("MoviesPage Debug: ", this.props);
+    
+    this.props.fetchMovies()
+  }
 
-      {props.loading ? (
-        <Loader />
-      ) : (
-        <OutputRegion />
-      )}
-    </div>
-  );
+  render() {
+    return (
+      <div className={styles.region}>
+
+        <SearchRegion
+        />
+
+        <StatusBar
+        />
+
+        {this.props.loading ? <Loader /> : <OutputRegion />}
+      </div>
+    );
+  }
 }
 
 function mapState2Props(state) {
   return {
-    loading: state.appReducer.loading
-  }
+    loading: state.appReducer.loading,
+  };
 }
 
-export default connect(mapState2Props, null)(MoviesPage);
+function mapDispatch2Props(dispath) {
+  return {
+    fetchMovies: () => dispath(fetchMovies()),
+  };
+}
+
+export default connect(mapState2Props, mapDispatch2Props)(MoviesPage);

@@ -11,12 +11,26 @@ import {
   setSearchByMode
 } from "../../redux/actions/actions";
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
+
+import qs from 'qs'
+
+function SearchRegion(props) {
+  
+    let history = useHistory()
+    let location = useLocation()
+
+    console.log('SearchRegion Debug: ', props);
+
+    const query = qs.stringify({
+      // sortBy: getState().appReducer.sortBy,
+      sortOrder: "desc",
+      search: props.searchQuery,
+      searchBy: props.searchBy
+    });
+    const url = `/search?${query}`;
 
 
-class SearchRegion extends Component {
-  // console.log(props);
-  render() {
     return (
       <div className={styles.SearchRegion}>
         {/* <h6>This is SearchRegion Component</h6> */}
@@ -29,35 +43,32 @@ class SearchRegion extends Component {
             <label>Find your movie</label>
             <input
               type="text"
-              value={this.props.searchQuery}
+              value={props.searchQuery}
               onChange={e => {
-                this.props.updateSearchQuery(e.target.value);
+                props.updateSearchQuery(e.target.value);
               }}
             />
             <label>
               Search By
               <select
-                value={this.props.searchBy}
+                value={props.searchBy}
                 onChange={e => {
-                  this.props.setSearchByMode(e.target.value);
+                  props.setSearchByMode(e.target.value);
                 }}
               >
                 <option value={SearchModes.TITLE}>{SearchModes.TITLE}</option>
                 <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
               </select>
             </label>
-            <Link to='/movies'>
               <input
                 type="button"
                 value="Submit"
-                onClick={() => this.props.fetchMovies()}
+                onClick={() => history.replace(url)}
               />
-            </Link>
           </form>
         </div>
       </div>
     );
-  }
 }
 
 function mapState2Props(state) {

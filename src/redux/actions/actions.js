@@ -25,37 +25,40 @@ export function fetchMovies() {
   return async (dispatch, getState) => {
     dispatch(fetchMoviesStart())
     try {
-      // const response = await axios.get('/movies')
-      
-      const query = qs.stringify({
-        sortBy: getState().appReducer.sortBy,
-        sortOrder: "desc",
-        search: getState().appReducer.searchQuery,
-        searchBy: getState().appReducer.searchBy
-      });
-      const url = `/movies?${query}`
+          // const response = await axios.get('/movies')
 
-      const response = await axios.get(
-        // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
-        // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-        // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-        url
-      );
-      const movies = response.data.data
-      
-      // console.log(
-      //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-      // );
-      // console.log(url)
+          // default params
+          // http://localhost:8080/search?sortOrder=desc&searchBy=title
+          // ?sortBy=vote_average&sortOrder=desc&searchBy=title
+          const query = qs.stringify({
+            sortBy: getState().appReducer.sortBy,
+            sortOrder: "desc",
+            search: getState().appReducer.searchQuery,
+            searchBy: getState().appReducer.searchBy,
+          });
+          const url = `/movies?${query}`;
 
-      // console.log("response.data.data = ", response.data.data)
+          const response = await axios.get(
+            // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
+            // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+            // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+            url
+          );
+          const movies = response.data.data;
 
-      // response.data.data.forEach(movie => {
-      //   movies.push(movie)
-      // })
+          // console.log(
+          //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+          // );
+          // console.log(url)
 
-      dispatch(fetchMoviesSuccess(movies, response.data.total))
-    } catch (e) {
+          // console.log("response.data.data = ", response.data.data)
+
+          // response.data.data.forEach(movie => {
+          //   movies.push(movie)
+          // })
+
+          dispatch(fetchMoviesSuccess(movies, response.data.total));
+        } catch (e) {
       console.log(e)
       dispatch(fetchMoviesErr(e))
     }
