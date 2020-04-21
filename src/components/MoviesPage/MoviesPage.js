@@ -11,12 +11,28 @@ import { fetchMovies } from "../../redux/actions/actions";
 
 import {useRouteMatch, useParams} from 'react-router-dom'
 
+import qs from 'qs'
+
 class MoviesPage extends Component {
+  
+  getArgs() {
+    return qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+  }
+
   async componentDidMount() {
     
     console.log("MoviesPage Debug: ", this.props);
     
-    this.props.fetchMovies()
+    // получить query параметры из props и передать в fetchMovies
+    this.props.fetchMovies(this.getArgs())
+  }
+  
+  // повторить Mount, сделать функцией
+  async componentDidUpdate() {
+    // console.log('componentDidUpdate Debug:', this.props.location.search)
+    // const values = qs.parse(this.props.location.search)
+    console.log('values', this.getArgs())
+    // this.props.fetchMovies(this.getArgs())
   }
 
   render() {
@@ -43,7 +59,7 @@ function mapState2Props(state) {
 
 function mapDispatch2Props(dispath) {
   return {
-    fetchMovies: () => dispath(fetchMovies()),
+    fetchMovies: args => dispath(fetchMovies(args)),
   };
 }
 

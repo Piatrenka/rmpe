@@ -20,15 +20,32 @@ function SearchRegion(props) {
     let history = useHistory()
     let location = useLocation()
 
-    console.log('SearchRegion Debug: ', props);
+    
+    
+    // Хранить локально
+    // sortOrder: "desc",
+    // search: props.searchQuery,
+    // searchBy: props.searchBy
+    // 
+    
+    const [form, setState] = React.useState({
+      sortOrder: "desc",
+      searchQuery: "",             // Строка поиска
+      searchBy: SearchModes.TITLE, // режим поиска
+    });
+    
+    console.log('SearchRegion Debug: ', form);
+    console.log('SearchRegion.location Debug:', location.search)
 
     const query = qs.stringify({
       // sortBy: getState().appReducer.sortBy,
-      sortOrder: "desc",
-      search: props.searchQuery,
-      searchBy: props.searchBy
+      sortBy: props.sortBy,
+      sortOrder: form.sortOrder,
+      search: form.searchQuery,
+      searchBy: form.searchBy
     });
-    const url = `/search?${query}`;
+
+    // const url = `/search?${query}`;
 
 
     return (
@@ -43,17 +60,25 @@ function SearchRegion(props) {
             <label>Find your movie</label>
             <input
               type="text"
-              value={props.searchQuery}
+              value={form.searchQuery}
               onChange={e => {
-                props.updateSearchQuery(e.target.value);
+                // props.updateSearchQuery(e.target.value);
+                setState({
+                  ...form,
+                  searchQuery: e.target.value
+                })
               }}
             />
             <label>
               Search By
               <select
-                value={props.searchBy}
+                value={form.searchBy}
                 onChange={e => {
-                  props.setSearchByMode(e.target.value);
+                  // props.setSearchByMode(e.target.value);
+                  setState({
+                    ...form,
+                    searchBy: e.target.value
+                  })
                 }}
               >
                 <option value={SearchModes.TITLE}>{SearchModes.TITLE}</option>
@@ -63,7 +88,9 @@ function SearchRegion(props) {
               <input
                 type="button"
                 value="Submit"
-                onClick={() => history.replace(url)}
+                onClick={() => history.replace({
+                  search: `?${query}`
+                })}
               />
           </form>
         </div>
@@ -73,8 +100,10 @@ function SearchRegion(props) {
 
 function mapState2Props(state) {
   return {
-    searchQuery: state.appReducer.searchQuery,
-    searchBy: state.appReducer.searchBy
+    sortBy: state.appReducer.sortBy,
+
+    // searchQuery: state.appReducer.searchQuery,
+    // searchBy: state.appReducer.searchBy,
   };
 }
 

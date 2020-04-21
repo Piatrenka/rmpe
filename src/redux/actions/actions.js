@@ -18,7 +18,7 @@ import axios from '../../utils/axios-movie'
 import qs from 'qs'
 
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
-export function fetchMovies() {
+export function fetchMovies(args) {
   
   // console.log("fetchMovies Debug: ", searchQuery, searchBy, sortBy);
 
@@ -30,12 +30,21 @@ export function fetchMovies() {
           // default params
           // http://localhost:8080/search?sortOrder=desc&searchBy=title
           // ?sortBy=vote_average&sortOrder=desc&searchBy=title
+
+          // const query = qs.stringify({
+          //   sortBy: getState().appReducer.sortBy,
+          //   sortOrder: "desc",
+          //   search: getState().appReducer.searchQuery,
+          //   searchBy: getState().appReducer.searchBy,
+          // });
+
           const query = qs.stringify({
-            sortBy: getState().appReducer.sortBy,
-            sortOrder: "desc",
-            search: getState().appReducer.searchQuery,
-            searchBy: getState().appReducer.searchBy,
+            sortBy: args.sortBy,
+            sortOrder: args.sortOrder,
+            search: args.search,
+            searchBy: args.searchBy,
           });
+
           const url = `/movies?${query}`;
 
           const response = await axios.get(
