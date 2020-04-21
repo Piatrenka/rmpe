@@ -31,7 +31,7 @@ class MoviesPage extends Component {
   async componentDidUpdate() {
     // console.log('componentDidUpdate Debug:', this.props.location.search)
     // const values = qs.parse(this.props.location.search)
-    console.log('values', this.getArgs())
+    console.log('MoviesPage componentDidUpdate Debug: ', this.getArgs())
     // this.props.fetchMovies(this.getArgs())
   }
 

@@ -28,14 +28,24 @@ function SearchRegion(props) {
     // searchBy: props.searchBy
     // 
     
+    const params = qs.parse(location.search, { ignoreQueryPrefix: true })
+    // console.log('params Debug: ', params)
+
     const [form, setState] = React.useState({
       sortOrder: "desc",
-      searchQuery: "",             // Строка поиска
-      searchBy: SearchModes.TITLE, // режим поиска
+      searchQuery: params.search || '',             // Строка поиска
+      searchBy: params.searchBy                    // режим поиска
     });
     
-    console.log('SearchRegion Debug: ', form);
-    console.log('SearchRegion.location Debug:', location.search)
+    // console.log('SearchRegion Debug: ', form);
+    // console.log('SearchRegion.location Debug:', location.search)
+
+    // const params = qs.parse(location.search, { ignoreQueryPrefix: true })
+    // setState({
+    //   ...form,
+    //   searchQuery: params.searchQuery,
+    //   searchBy: params.searchBy
+    // })
 
     const query = qs.stringify({
       // sortBy: getState().appReducer.sortBy,
