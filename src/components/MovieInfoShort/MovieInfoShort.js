@@ -5,10 +5,12 @@ import posterNotFound from "../../keep-calm-poster-not-found.png";
 
 import Card from "react-bootstrap/Card";
 
-import {Link} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const MovieInfoShort = props => {
   // console.log(props);
+
+  let history = useHistory()
 
   const movie = props.movie;
 
@@ -41,17 +43,16 @@ const MovieInfoShort = props => {
   );
 
   return (
-    <Link to={`/film/${movie.id}`}>
       <div
         className={styles.region}
         style={style}
-        onClick={e => props.onMovieClick(movie.id)}
+        // onClick={e => props.onMovieClick(movie.id)}
+        onClick={e => history.replace(`/movies/${movie.id}`)}
       >
         {/* <h6>This is the MovieInfo component</h6> */}
         {/* {props.short ? movieInfoShort : movieInfo} */}
         {movieInfoShort}
       </div>
-    </Link>
   );
 };
 

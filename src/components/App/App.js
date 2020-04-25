@@ -55,7 +55,7 @@ class App extends Component {
           <Router>
             <Switch>
               <Route path='/' exact render={() => (<Redirect to={`/search?${query}`} />)} />
-              <Route path='/film/:movieId' component={MoviePage} />
+              <Route path='/movies/:movieId' component={MoviePage} />
               <Route path='/search' component={MoviesPage} />
               <Route render={(match) => {
                 // console.log('match', match)

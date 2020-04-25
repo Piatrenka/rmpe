@@ -17,6 +17,7 @@ import {
 import axios from '../../utils/axios-movie'
 import qs from 'qs'
 
+
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
 export function fetchMovies(args) {
   
@@ -67,6 +68,66 @@ export function fetchMovies(args) {
           // })
 
           dispatch(fetchMoviesSuccess(movies, response.data.total));
+        } catch (e) {
+      console.log(e)
+      dispatch(fetchMoviesErr(e))
+    }
+  }
+
+}
+
+// здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
+export function fetchMovie(movieId) {
+  
+  console.log("fetchMovie Debug: ", movieId);
+  
+  return async (dispatch, getState) => {
+    dispatch(fetchMoviesStart())
+    try {
+          // const response = await axios.get('/movies')
+
+          // default params
+          // http://localhost:8080/search?sortOrder=desc&searchBy=title
+          // ?sortBy=vote_average&sortOrder=desc&searchBy=title
+
+          // const query = qs.stringify({
+          //   sortBy: getState().appReducer.sortBy,
+          //   sortOrder: "desc",
+          //   search: getState().appReducer.searchQuery,
+          //   searchBy: getState().appReducer.searchBy,
+          // });
+
+          // const query = qs.stringify({
+          //   sortBy: args.sortBy,
+          //   sortOrder: args.sortOrder,
+          //   search: args.search,
+          //   searchBy: args.searchBy,
+          // });
+
+          const url = `/movies/${movieId}`;
+
+          const response = await axios.get(
+            // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
+            // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+            // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+            // "/movies/511679"
+            url
+          );
+
+          const movies = [response.data];
+
+          // console.log(
+          //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+          // );
+          // console.log(url)
+
+          console.log("response.data = ", response.data)
+
+          // response.data.data.forEach(movie => {
+          //   movies.push(movie)
+          // })
+
+          dispatch(fetchMoviesSuccess(movies, 1));
         } catch (e) {
       console.log(e)
       dispatch(fetchMoviesErr(e))

@@ -59,9 +59,9 @@ function mapState2Props(state) {
   };
 }
 
-function mapDispatch2Props(dispath) {
+function mapDispatch2Props(dispatch) {
   return {
-    fetchMovies: args => dispath(fetchMovies(args)),
+    fetchMovies: args => dispatch(fetchMovies(args))
   };
 }
 
