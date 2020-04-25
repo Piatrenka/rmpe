@@ -19,16 +19,16 @@ import {Link} from 'react-router-dom'
 import Loader from "../UI/Loader/Loader";
 
 const MovieInfo = props => {
-  console.log('MovieInfo Debug: props> ', props.movies);
+  console.log('MovieInfo Debug: props> ', props);
 
   // const movie = props.movie;
   let movie = null
-  // movie = props.movies.find(movie => {
-  //   // return movie.id === props.selectedMovieId;
-  //   return movie.id === 238;
-  // });
+  movie = props.movies.find(movie => {
+    return movie.id === Number.parseInt(props.movieId);
+    // return movie.id === 238;
+  });
 
-  movie = props.movies[0]
+  // movie = props.movies[0]
 
   const movieInfo = (
     <React.Fragment>

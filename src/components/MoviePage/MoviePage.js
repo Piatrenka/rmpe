@@ -35,7 +35,7 @@ class MoviePage extends Component {
   // }
 
   async componentDidMount() {
-    console.log("MoviePage Debug: ", this.props.match.params.movieId);
+    // console.log("MoviePage Debug: ", this.props.match.params.movieId);
 
     // получить query параметры из props и передать в fetchMovies
     this.props.fetchMovie(this.props.match.params.movieId);
@@ -49,7 +49,12 @@ class MoviePage extends Component {
   // }
 
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate prevProps', prevProps)
+    console.log('componentDidUpdate this.props Debug', this.props, prevProps)
+
+    if (this.props.match.url !== prevProps.match.url) {
+      this.props.fetchMovie(this.props.match.params.movieId);
+    }
+
   }
 
   render() {
@@ -59,7 +64,11 @@ class MoviePage extends Component {
       <div className={styles.region}>
         {/* <h6>This is the MoviePage Component</h6> */}
 
-        {this.props.loading ? <Loader /> : <SelectedRegion />}
+        {this.props.loading ? (
+          <Loader />
+        ) : (
+          <SelectedRegion movieId={this.props.match.params.movieId} />
+        )}
 
         {/* <SelectedRegion
         // movie={props.movie}
