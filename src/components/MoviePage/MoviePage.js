@@ -49,7 +49,7 @@ class MoviePage extends Component {
   // }
 
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate this.props Debug', this.props, prevProps)
+    // console.log('componentDidUpdate this.props Debug', this.props, prevProps)
 
     if (this.props.match.url !== prevProps.match.url) {
       this.props.fetchMovie(this.props.match.params.movieId);

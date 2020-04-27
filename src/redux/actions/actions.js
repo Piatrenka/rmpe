@@ -80,7 +80,7 @@ export function fetchMovies(args) {
 // здесь нужен код который будет диспатчить действия action, пока не понятно, как делать
 export function fetchMovie(movieId) {
   
-  console.log("fetchMovie Debug: ", movieId);
+  // console.log("fetchMovie Debug: ", movieId);
   
   return async (dispatch, getState) => {
     dispatch(fetchMoviesStart())
@@ -124,13 +124,13 @@ export function fetchMovie(movieId) {
           // );
           // console.log(url)
 
-          console.log("response.data = ", movies[0].genres, movies[0].genres.join('%2C%20'))
+          // console.log("response.data = ", movies[0].genres, movies[0].genres.join('%2C%20'))
           
           url = `/movies?filter=${movies[0].genres.join(', ')}`;
-          console.log(url);
+          // console.log(url);
 
           response = await axios.get(url)
-          console.log(response)
+          // console.log('response = ', response.data.data)
           
           
           // response.data.data.forEach(movie => {
@@ -140,7 +140,19 @@ export function fetchMovie(movieId) {
           // dispatch(fetchMoviesSuccess([...movies, ...response.data.data], 1));
           // dispatch(fetchMoviesSuccess([...new Set([...movies, ...response.data.data])], response.data.total));
           // dispatch(fetchMoviesSuccess(_.union(movies, response.data.data), response.data.total));
-          dispatch(fetchMoviesSuccess(response.data.data, response.data.total));
+
+          if (!response.data.data.find(el => {
+            return movies[0].id === el.id
+          }))  {
+            // console.log(`Movie ${movies[0].id} not found`)
+            dispatch(fetchMoviesSuccess([ ...movies, ...response.data.data], response.data.total));
+          } else {
+            // console.log(`Movie ${movies[0].id} found`)
+            dispatch(fetchMoviesSuccess(response.data.data, response.data.total));
+          }
+
+
+
         } catch (e) {
       console.log(e)
       dispatch(fetchMoviesErr(e))

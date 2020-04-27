@@ -19,7 +19,7 @@ import {Link} from 'react-router-dom'
 import Loader from "../UI/Loader/Loader";
 
 const MovieInfo = props => {
-  console.log('MovieInfo Debug: props> ', props);
+  // console.log('MovieInfo Debug: props> ', props);
 
   // const movie = props.movie;
   let movie = null
