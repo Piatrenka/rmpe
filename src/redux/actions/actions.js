@@ -117,39 +117,44 @@ export function fetchMovie(movieId) {
           );
 
           const movies = [response.data];
-          // const movies = response.data.data;
-
-          // console.log(
-          //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-          // );
-          // console.log(url)
-
-          // console.log("response.data = ", movies[0].genres, movies[0].genres.join('%2C%20'))
-          
-          url = `/movies?filter=${movies[0].genres.join(', ')}`;
-          // console.log(url);
-
-          response = await axios.get(url)
-          // console.log('response = ', response.data.data)
-          
-          
-          // response.data.data.forEach(movie => {
-          //   movies.push(movie)
-          // })
-
-          // dispatch(fetchMoviesSuccess([...movies, ...response.data.data], 1));
-          // dispatch(fetchMoviesSuccess([...new Set([...movies, ...response.data.data])], response.data.total));
-          // dispatch(fetchMoviesSuccess(_.union(movies, response.data.data), response.data.total));
-
-          if (!response.data.data.find(el => {
-            return movies[0].id === el.id
-          }))  {
-            // console.log(`Movie ${movies[0].id} not found`)
-            dispatch(fetchMoviesSuccess([ ...movies, ...response.data.data], response.data.total));
+          if (Object.keys(response.data).length === 0 && response.data.constructor === Object) {
+            // console.log('Debug movies ', movies, movies.length, response.data)
+            dispatch(fetchMoviesSuccess([], 0))
           } else {
-            // console.log(`Movie ${movies[0].id} found`)
-            dispatch(fetchMoviesSuccess(response.data.data, response.data.total));
+            // console.log(
+            //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+            // );
+            // console.log(url)
+  
+            // console.log("response.data = ", movies[0].genres, movies[0].genres.join('%2C%20'))
+            
+            url = `/movies?filter=${movies[0].genres.join(', ')}`;
+            // console.log(url);
+  
+            response = await axios.get(url)
+            // console.log('response = ', response.data.data)
+            
+            
+            // response.data.data.forEach(movie => {
+            //   movies.push(movie)
+            // })
+  
+            // dispatch(fetchMoviesSuccess([...movies, ...response.data.data], 1));
+            // dispatch(fetchMoviesSuccess([...new Set([...movies, ...response.data.data])], response.data.total));
+            // dispatch(fetchMoviesSuccess(_.union(movies, response.data.data), response.data.total));
+  
+            if (!response.data.data.find(el => {
+              return movies[0].id === el.id
+            }))  {
+              // console.log(`Movie ${movies[0].id} not found`)
+              dispatch(fetchMoviesSuccess([ ...movies, ...response.data.data], response.data.total));
+            } else {
+              // console.log(`Movie ${movies[0].id} found`)
+              dispatch(fetchMoviesSuccess(response.data.data, response.data.total));
+            }
           }
+          
+
 
 
 

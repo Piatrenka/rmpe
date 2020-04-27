@@ -22,6 +22,20 @@ const MovieInfo = props => {
   // console.log('MovieInfo Debug: props> ', props);
 
   // const movie = props.movie;
+  if (props.movies.length === 0) {
+    return (
+      <div>
+        Movie not found
+        <Link to="/">
+          <Button>
+            Return to search
+          </Button>
+        </Link>
+      </div>
+    );
+  } 
+
+
   let movie = null
   movie = props.movies.find(movie => {
     return movie.id === Number.parseInt(props.movieId);

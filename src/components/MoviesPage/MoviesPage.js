@@ -21,7 +21,7 @@ class MoviesPage extends Component {
 
   async componentDidMount() {
     
-    console.log("MoviesPage Debug: ", this.props);
+    // console.log("MoviesPage Debug: ", this.props);
     
     // получить query параметры из props и передать в fetchMovies
     this.props.fetchMovies(this.getArgs())
@@ -31,7 +31,7 @@ class MoviesPage extends Component {
   async componentDidUpdate(prevProps) {
     // console.log('componentDidUpdate Debug:', this.props.location.search)
     // const values = qs.parse(this.props.location.search)
-    console.log('MoviesPage componentDidUpdate Debug: ', this.getArgs())
+    // console.log('MoviesPage componentDidUpdate Debug: ', this.getArgs())
     if (this.props.location.search !== prevProps.location.search) {
       this.props.fetchMovies(this.getArgs())
     }
