@@ -10,7 +10,7 @@ import { fetchMoviesByGenre } from "../../redux/actions/actions";
 class OutputByGenreRegion extends Component {
 
   async componentDidMount() {
-    // this.props.fetchMoviesByGenre(this.props.genres)
+    this.props.fetchMoviesByGenre(this.props.genres)
   }
 
   render() {
