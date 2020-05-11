@@ -55,5 +55,16 @@ function reorderMovies(arr, sortBy) {
 
 }
 
+// Из массива объектов сделать объект объектов с ключем по заданному свойству
+const cnvArr2Obj = (arr, key) => {
+  const initVal = {};
+  return arr.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initVal);
+};
 
-export { getRandomInt, getNRandomWords, SearchModes, SortModes, reorderMovies };
+
+export { getRandomInt, getNRandomWords, SearchModes, SortModes, reorderMovies, cnvArr2Obj };

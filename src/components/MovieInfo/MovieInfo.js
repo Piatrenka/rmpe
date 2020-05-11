@@ -22,7 +22,7 @@ const MovieInfo = props => {
   // console.log('MovieInfo Debug: props> ', props);
 
   // const movie = props.movie;
-  if (props.movies.length === 0) {
+  if (Object.keys(props.movie).length === 0 && props.movie.constructor === Object) {
     return (
       <div>
         Movie not found
@@ -36,11 +36,11 @@ const MovieInfo = props => {
   } 
 
 
-  let movie = null
-  movie = props.movies.find(movie => {
-    return movie.id === Number.parseInt(props.movieId);
-    // return movie.id === 238;
-  });
+  let movie = props.movie
+  // movie = props.movies.find(movie => {
+  //   return movie.id === Number.parseInt(props.movieId);
+  //   // return movie.id === 238;
+  // });
 
   // movie = props.movies[0]
 
@@ -125,8 +125,8 @@ const MovieInfo = props => {
 
 function mapState2Props(state) {
   return {
-    movies: state.appReducer.movies,
-    selectedMovieId: state.appReducer.selectedMovieId
+    // movies: state.appReducer.movies,
+    // selectedMovieId: state.appReducer.selectedMovieId
   };
 }
 

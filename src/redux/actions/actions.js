@@ -8,6 +8,9 @@ import {
   FETCH_MOVIES_START, 
   FETCH_MOVIES_SUCCESS, 
   FETCH_MOVIES_ERR, 
+  
+  FETCH_MOVIE_SUCCESS, 
+  
   UPDATE_SEARCH_QUERY, 
   SET_SEARCHBY_MODE, 
   SET_SORTBY_MODE,
@@ -16,6 +19,8 @@ import {
  } from "./actionTypes"
 import axios from '../../utils/axios-movie'
 import qs from 'qs'
+
+import { cnvArr2Obj } from '../../utils/common'
 
 // import _ from 'lodash'
 
@@ -55,7 +60,12 @@ export function fetchMovies(args) {
             // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
             url
           );
-          const movies = response.data.data;
+          // const movies = response.data.data;
+          const movies = cnvArr2Obj(response.data.data, 'id');
+          const visibleMovies = Object.keys(movies)
+
+          // console.log('cnvArr2Obj(movies): ', cnvArr2Obj(movies, 'id'))
+          // console.log('actions.fetchMovies Debug : ', movies, visibleMovies)
 
           // console.log(
           //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
@@ -68,7 +78,9 @@ export function fetchMovies(args) {
           //   movies.push(movie)
           // })
 
-          dispatch(fetchMoviesSuccess(movies, response.data.total));
+          dispatch(
+            fetchMoviesSuccess(movies, visibleMovies, response.data.total)
+          );
         } catch (e) {
       console.log(e)
       dispatch(fetchMoviesErr(e))
@@ -116,53 +128,84 @@ export function fetchMovie(movieId) {
             url
           );
 
-          const movies = [response.data];
+          // const movies = [response.data];
+          
           if (Object.keys(response.data).length === 0 && response.data.constructor === Object) {
             // console.log('Debug movies ', movies, movies.length, response.data)
-            dispatch(fetchMoviesSuccess([], 0))
+            dispatch(fetchMovieSuccess({}, [], 0))
           } else {
-            // console.log(
-            //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-            // );
-            // console.log(url)
-  
-            // console.log("response.data = ", movies[0].genres, movies[0].genres.join('%2C%20'))
-            
-            url = `/movies?filter=${movies[0].genres.join(', ')}`;
-            // console.log(url);
-  
-            response = await axios.get(url)
-            // console.log('response = ', response.data.data)
-            
-            
-            // response.data.data.forEach(movie => {
-            //   movies.push(movie)
-            // })
-  
-            // dispatch(fetchMoviesSuccess([...movies, ...response.data.data], 1));
-            // dispatch(fetchMoviesSuccess([...new Set([...movies, ...response.data.data])], response.data.total));
-            // dispatch(fetchMoviesSuccess(_.union(movies, response.data.data), response.data.total));
-  
-            if (!response.data.data.find(el => {
-              return movies[0].id === el.id
-            }))  {
-              // console.log(`Movie ${movies[0].id} not found`)
-              dispatch(fetchMoviesSuccess([ ...movies, ...response.data.data], response.data.total));
-            } else {
-              // console.log(`Movie ${movies[0].id} found`)
-              dispatch(fetchMoviesSuccess(response.data.data, response.data.total));
-            }
+            const movies = cnvArr2Obj([response.data], "id");
+            const visibleMovies = Object.keys(movies);
+            dispatch(fetchMovieSuccess(movies, visibleMovies, 1));
           }
-          
 
+          // if (Object.keys(response.data).length === 0 && response.data.constructor === Object) {
+          //   // console.log('Debug movies ', movies, movies.length, response.data)
+          //   dispatch(fetchMoviesSuccess({}, [], 0))
+          // } else {
+          //   // console.log(
+          //   //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+          //   // );
+          //   // console.log(url)
 
+          //   // console.log("response.data = ", movies[0].genres, movies[0].genres.join('%2C%20'))
 
+          //   url = `/movies?filter=${movies[0].genres.join(', ')}`;
+          //   // console.log(url);
 
+          //   response = await axios.get(url)
+          //   // console.log('response = ', response.data.data)
+
+          //   // response.data.data.forEach(movie => {
+          //   //   movies.push(movie)
+          //   // })
+
+          //   // dispatch(fetchMoviesSuccess([...movies, ...response.data.data], 1));
+          //   // dispatch(fetchMoviesSuccess([...new Set([...movies, ...response.data.data])], response.data.total));
+          //   // dispatch(fetchMoviesSuccess(_.union(movies, response.data.data), response.data.total));
+
+          //   if (!response.data.data.find(el => {
+          //     return movies[0].id === el.id
+          //   }))  {
+          //     // console.log(`Movie ${movies[0].id} not found`)
+          //     dispatch(fetchMoviesSuccess([ ...movies, ...response.data.data], response.data.total));
+          //   } else {
+          //     // console.log(`Movie ${movies[0].id} found`)
+          //     dispatch(fetchMoviesSuccess(response.data.data, response.data.total));
+          //   }
+          // }
         } catch (e) {
       console.log(e)
       dispatch(fetchMoviesErr(e))
     }
   }
+
+}
+
+export function fetchMoviesByGenre(genre) {
+  
+  console.log("fetchMovieByGenre Debug: ", genre);
+  
+  return async (dispatch, getState) => {
+    dispatch(fetchMoviesStart());
+    try {
+      let url = `/movies?filter=${genre.join(", ")}`;
+      // console.log(url);
+
+      response = await axios.get(url);
+
+      const movies = cnvArr2Obj(response.data.data, "id");
+      const visibleMovies = Object.keys(movies);
+
+      dispatch(
+        fetchMoviesSuccess(movies, visibleMovies, response.data.total)
+      )
+
+    } catch (e) {
+      console.log(e);
+      dispatch(fetchMoviesErr(e));
+    }
+  };
 
 }
 
@@ -172,10 +215,20 @@ export function fetchMoviesStart() {
   }
 }
 
-export function fetchMoviesSuccess(movies, recordsTotal) {
+export function fetchMoviesSuccess(movies, visibleMovies, recordsTotal) {
   return {
     type: FETCH_MOVIES_SUCCESS,
     movies: movies,
+    visibleMovies: visibleMovies,
+    recordsTotal: recordsTotal
+  }
+}
+
+export function fetchMovieSuccess(movies, visibleMovies, recordsTotal) {
+  return {
+    type: FETCH_MOVIES_SUCCESS,
+    movies: movies,
+    visibleMovies: visibleMovies,
     recordsTotal: recordsTotal
   }
 }

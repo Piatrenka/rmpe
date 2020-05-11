@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styles from "./MoviePage.css";
 import SelectedRegion from "../SelectedRegion/SelectedRegion";
-import OutputRegion from "../OutputRegion/OutputRegion";
+// import OutputRegion from "../OutputRegion/OutputRegion";
+import OutputByGenreRegion from "../OutputByGenreRegion/OutputByGenreRegion"
 import StatusBar from "../StatusBar/StatusBar";
 
 import { useLocation, useRouteMatch, useParams } from 'react-router-dom'
@@ -58,7 +59,11 @@ class MoviePage extends Component {
   }
 
   render() {
-    // console.log("MoviePage Debug: ", this.props)
+    // console.log("MoviePage Debug >>: ", this.props.movies)
+    // console.log(
+    //   "MoviePage Debug >>>: ",
+    //   Object.keys(this.props.movies).length === 0 ? {} : this.props.movies[this.props.match.params.movieId]
+    // );
 
     return (
       <div className={styles.region}>
@@ -67,7 +72,24 @@ class MoviePage extends Component {
         {this.props.loading ? (
           <Loader />
         ) : (
-          <SelectedRegion movieId={this.props.match.params.movieId} />
+          <React.Fragment>
+            <SelectedRegion
+              movie={
+                Object.keys(this.props.movies).length === 0
+                  ? {}
+                  : this.props.movies[this.props.match.params.movieId]
+              }
+            />
+            <StatusBar />
+            <OutputByGenreRegion 
+              genres={
+                Object.keys(this.props.movies).length === 0
+                  ? {}
+                  : this.props.movies[this.props.match.params.movieId].genres
+  
+              }
+            />
+          </React.Fragment>
         )}
 
         {/* <SelectedRegion
@@ -76,17 +98,12 @@ class MoviePage extends Component {
         // selectedMovieId={props.selectedMovieId}
         /> */}
 
-        <StatusBar
-        // sortBy={props.sortBy}
-        // onSortModeChange={props.onSortModeChange}
-        // detectedAmount={props.detectedAmount}
-        />
 
         {/* <OutputRegion
         // movies={props.movies} onMovieClick={props.onMovieClick}
         /> */}
 
-        {this.props.loading ? <Loader /> : <OutputRegion />}
+        {/* {this.props.loading ? <Loader /> : <OutputRegion />} */}
       </div>
     );
   }
@@ -94,6 +111,7 @@ class MoviePage extends Component {
 
 function mapState2Props(state) {
   return {
+    movies: state.appReducer.movies,
     loading: state.appReducer.loading
   }
 }

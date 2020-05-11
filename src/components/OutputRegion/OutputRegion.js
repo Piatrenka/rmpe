@@ -10,7 +10,8 @@ import {connect} from 'react-redux'
 const OutputRegion = props => {
   let comp;
 
-  if (props.movies.length > 0) {
+  // Теперь movies это объект объектов с ключами по id фильма 
+  if (Object.keys(props.movies).length > 0) {
     comp = <Movies />;
   } else {
     comp = <MoviesNotFound />;
