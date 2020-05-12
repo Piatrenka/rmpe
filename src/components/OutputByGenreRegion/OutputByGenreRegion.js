@@ -11,6 +11,13 @@ class OutputByGenreRegion extends Component {
 
   async componentDidMount() {
     this.props.fetchMoviesByGenre(this.props.genres)
+
+    // console.log('componentDidMount Debug: ', this.props.match)
+    // if (this.props.match.url !== prevProps.match.url) {
+    //   this.props.fetchMovie(this.props.match.params.movieId);
+    // }
+
+
   }
 
   render() {

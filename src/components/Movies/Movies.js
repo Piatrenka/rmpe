@@ -13,10 +13,10 @@ import { movieClick } from "../../redux/actions/actions";
 
 const Movies = props => {
   let movies = null;
-  let movie = null;
+  // let movie = null;
 
-  movies = props.visibleMovies.map(id => {
-    movie = props.movies[id]  
+  movies = props.movies.map(movie => {
+    // movie = props.movies[id]  
     return (
       <Col
         key={movie.id}
@@ -46,8 +46,9 @@ const Movies = props => {
 
 function mapState2Props(state) {
   return {
-    movies: state.appReducer.movies,     // Объект объектов с ключем по id
-    visibleMovies: state.appReducer.visibleMovies  // Массив с id фильмов
+    // movies: state.appReducer.movies,     // Объект объектов с ключем по id
+    // visibleMovies: state.appReducer.visibleMovies  // Массив с id фильмов
+    movies: state.appReducer.visibleMovies.map(id => state.appReducer.movies[id])
   }
 }
 

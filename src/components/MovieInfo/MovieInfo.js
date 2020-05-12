@@ -12,7 +12,7 @@ import Button from "react-bootstrap/Button";
 import Logo from "../Logo/Logo";
 
 import {connect} from 'react-redux'
-import { return2Search } from "../../redux/actions/actions";
+// import { return2Search } from "../../redux/actions/actions";
 
 import {Link} from 'react-router-dom'
 
@@ -132,7 +132,7 @@ function mapState2Props(state) {
 
 function mapDispatch2Props(dispatch) {
   return {
-    onReturn2MoviesClick: () => dispatch(return2Search())
+    // onReturn2MoviesClick: () => dispatch(return2Search())
   };
 }
 

@@ -11,7 +11,7 @@ const OutputRegion = props => {
   let comp;
 
   // Теперь movies это объект объектов с ключами по id фильма 
-  if (Object.keys(props.movies).length > 0) {
+  if (props.movies.length > 0) {
     comp = <Movies />;
   } else {
     comp = <MoviesNotFound />;
@@ -28,7 +28,7 @@ const OutputRegion = props => {
 
 function mapState2Props(state) {
   return {
-    movies: state.appReducer.movies
+    movies: state.appReducer.visibleMovies.map(id => state.appReducer.movies[id])
   }
 }
 

@@ -4,6 +4,7 @@ import SelectedRegion from "../SelectedRegion/SelectedRegion";
 // import OutputRegion from "../OutputRegion/OutputRegion";
 import OutputByGenreRegion from "../OutputByGenreRegion/OutputByGenreRegion"
 import StatusBar from "../StatusBar/StatusBar";
+import MovieNotFound from "../MovieNotFound/MovieNotFound"
 
 import { useLocation, useRouteMatch, useParams } from 'react-router-dom'
 
@@ -65,55 +66,31 @@ class MoviePage extends Component {
     //   Object.keys(this.props.movies).length === 0 ? {} : this.props.movies[this.props.match.params.movieId]
     // );
 
+    let movie = null
+    if (Object.keys(this.props.movies).length !== 0) {
+      movie = this.props.movies[this.props.match.params.movieId]
+    } 
+
+    if (this.props.loading) return <Loader />
+    if (!movie) return <MovieNotFound />
+    
     return (
-      <div className={styles.region}>
-        {/* <h6>This is the MoviePage Component</h6> */}
+      <React.Fragment>
+        <SelectedRegion movie={movie} />
+        <StatusBar />
+        <OutputByGenreRegion genres={movie.genres} />
+      </React.Fragment>
+    )
 
-        {this.props.loading ? (
-          <Loader />
-        ) : (
-          <React.Fragment>
-            <SelectedRegion
-              movie={
-                Object.keys(this.props.movies).length === 0
-                  ? {}
-                  : this.props.movies[this.props.match.params.movieId]
-              }
-            />
-            <StatusBar />
-            <OutputByGenreRegion 
-              genres={
-                Object.keys(this.props.movies).length === 0
-                  ? {}
-                  : this.props.movies[this.props.match.params.movieId].genres
-  
-              }
-            />
-          </React.Fragment>
-        )}
-
-        {/* <SelectedRegion
-        // movie={props.movie}
-        // onReturn2MoviesClick={props.onReturn2MoviesClick}
-        // selectedMovieId={props.selectedMovieId}
-        /> */}
-
-
-        {/* <OutputRegion
-        // movies={props.movies} onMovieClick={props.onMovieClick}
-        /> */}
-
-        {/* {this.props.loading ? <Loader /> : <OutputRegion />} */}
-      </div>
-    );
   }
 }
 
 function mapState2Props(state) {
   return {
+    // movie: state.appReducer.movies[this.props.match.params.movieId],
     movies: state.appReducer.movies,
-    loading: state.appReducer.loading
-  }
+    loading: state.appReducer.loading,
+  };
 }
 
 function mapDispatch2Props(dispatch) {

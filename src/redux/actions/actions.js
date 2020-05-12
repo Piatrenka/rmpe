@@ -15,7 +15,10 @@ import {
   SET_SEARCHBY_MODE, 
   SET_SORTBY_MODE,
   MOVIE_CLICK,
-  RETURN_2_SEARCH
+
+  FETCH_MOVIES_BY_GENRE_START,
+  FETCH_MOVIES_BY_GENRE_SUCCESS,
+  // RETURN_2_SEARCH
  } from "./actionTypes"
 import axios from '../../utils/axios-movie'
 import qs from 'qs'
@@ -30,62 +33,64 @@ export function fetchMovies(args) {
   // console.log("fetchMovies Debug: ", searchQuery, searchBy, sortBy);
 
   return async (dispatch, getState) => {
-    dispatch(fetchMoviesStart())
+    dispatch(fetchMoviesStart());
     try {
-          // const response = await axios.get('/movies')
+      // const response = await axios.get('/movies')
 
-          // default params
-          // http://localhost:8080/search?sortOrder=desc&searchBy=title
-          // ?sortBy=vote_average&sortOrder=desc&searchBy=title
+      // default params
+      // http://localhost:8080/search?sortOrder=desc&searchBy=title
+      // ?sortBy=vote_average&sortOrder=desc&searchBy=title
 
-          // const query = qs.stringify({
-          //   sortBy: getState().appReducer.sortBy,
-          //   sortOrder: "desc",
-          //   search: getState().appReducer.searchQuery,
-          //   searchBy: getState().appReducer.searchBy,
-          // });
+      // const query = qs.stringify({
+      //   sortBy: getState().appReducer.sortBy,
+      //   sortOrder: "desc",
+      //   search: getState().appReducer.searchQuery,
+      //   searchBy: getState().appReducer.searchBy,
+      // });
 
-          const query = qs.stringify({
-            sortBy: args.sortBy,
-            sortOrder: args.sortOrder,
-            search: args.search,
-            searchBy: args.searchBy,
-          });
+      const query = qs.stringify({
+        sortBy: args.sortBy,
+        sortOrder: args.sortOrder,
+        search: args.search,
+        searchBy: args.searchBy,
+      });
 
-          const url = `/movies?${query}`;
+      const url = `/movies?${query}`;
 
-          const response = await axios.get(
-            // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
-            // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-            // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-            url
-          );
-          // const movies = response.data.data;
-          const movies = cnvArr2Obj(response.data.data, 'id');
-          const visibleMovies = Object.keys(movies)
+      const response = await axios.get(
+        // "/movies?sortBy=vote_average&sortOrder=desc&search=LORD&searchBy=title"
+        // `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+        // `/movies?sortBy=${sortBy.toLowerCase()}&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+        url
+      );
+      // const movies = response.data.data;
 
-          // console.log('cnvArr2Obj(movies): ', cnvArr2Obj(movies, 'id'))
-          // console.log('actions.fetchMovies Debug : ', movies, visibleMovies)
+      // const movies = cnvArr2Obj(response.data.data, 'id');
+      // const visibleMovies = Object.keys(movies)
 
-          // console.log(
-          //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
-          // );
-          // console.log(url)
+      // console.log('cnvArr2Obj(movies): ', cnvArr2Obj(movies, 'id'))
+      // console.log('actions.fetchMovies Debug : ', movies, visibleMovies)
 
-          // console.log("response.data.data = ", response.data.data)
+      // console.log(
+      //   `/movies?sortBy=vote_average&sortOrder=desc&search=${searchQuery}&searchBy=${searchBy.toLowerCase()}`
+      // );
+      // console.log(url)
 
-          // response.data.data.forEach(movie => {
-          //   movies.push(movie)
-          // })
+      // console.log("response.data.data = ", response.data.data)
 
-          dispatch(
-            fetchMoviesSuccess(movies, visibleMovies, response.data.total)
-          );
-        } catch (e) {
-      console.log(e)
-      dispatch(fetchMoviesErr(e))
+      // response.data.data.forEach(movie => {
+      //   movies.push(movie)
+      // })
+
+      dispatch(
+        // fetchMoviesSuccess(movies, visibleMovies, response.data.total)
+        fetchMoviesSuccess(response.data.data, response.data.total)
+      );
+    } catch (e) {
+      console.log(e);
+      dispatch(fetchMoviesErr(e));
     }
-  }
+  };
 
 }
 
@@ -130,14 +135,18 @@ export function fetchMovie(movieId) {
 
           // const movies = [response.data];
           
-          if (Object.keys(response.data).length === 0 && response.data.constructor === Object) {
-            // console.log('Debug movies ', movies, movies.length, response.data)
-            dispatch(fetchMovieSuccess({}, [], 0))
-          } else {
-            const movies = cnvArr2Obj([response.data], "id");
-            const visibleMovies = Object.keys(movies);
-            dispatch(fetchMovieSuccess(movies, visibleMovies, 1));
-          }
+          // if (Object.keys(response.data).length === 0 && response.data.constructor === Object) {
+          //   // console.log('Debug movies ', movies, movies.length, response.data)
+          //   dispatch(fetchMovieSuccess({}, [], 0))
+          // } else {
+          //   const movies = cnvArr2Obj([response.data], "id");
+          //   const visibleMovies = Object.keys(movies);
+          //   dispatch(fetchMovieSuccess(movies, visibleMovies, 1));
+          // }
+
+          dispatch(
+            fetchMovieSuccess(response.data)
+          )
 
           // if (Object.keys(response.data).length === 0 && response.data.constructor === Object) {
           //   // console.log('Debug movies ', movies, movies.length, response.data)
@@ -187,20 +196,20 @@ export function fetchMoviesByGenre(genre) {
   console.log("fetchMovieByGenre Debug: ", genre);
   
   return async (dispatch, getState) => {
-    dispatch(fetchMoviesStart());
+    dispatch(fetchMoviesByGenreStart());
     try {
       let url = `/movies?filter=${genre.join(", ")}`;
       // console.log(url);
 
       let response = await axios.get(url);
 
-      const movies = cnvArr2Obj(response.data.data, "id");
-      const visibleMovies = Object.keys(movies);
+      // const movies = cnvArr2Obj(response.data.data, "id");
+      // const visibleMovies = Object.keys(movies);
 
-      console.log('fetchMoviesByGenre Debug: ', movies, visibleMovies)
-      // dispatch(
-      //   fetchMoviesByGenreSuccess(movies, visibleMovies, response.data.total)
-      // )
+      // console.log('fetchMoviesByGenre Debug: ', movies, visibleMovies)
+      dispatch(
+        fetchMoviesByGenreSuccess(response.data.data, response.data.total)
+      )
 
     } catch (e) {
       console.log(e);
@@ -216,29 +225,34 @@ export function fetchMoviesStart() {
   }
 }
 
-export function fetchMoviesSuccess(movies, visibleMovies, recordsTotal) {
+export function fetchMoviesByGenreStart() {
+  return {
+    type: FETCH_MOVIES_BY_GENRE_START
+  }
+}
+
+// В movies теперь массив из фильмов
+export function fetchMoviesSuccess(movies, recordsTotal) {
   return {
     type: FETCH_MOVIES_SUCCESS,
     movies: movies,
-    visibleMovies: visibleMovies,
+    // visibleMovies: visibleMovies,
     recordsTotal: recordsTotal
   }
 }
 
-export function fetchMoviesByGenreSuccess(movies, visibleMovies, recordsTotal) {
-  return {
-    type: FETCH_MOVIES_SUCCESS,
-    movies: movies,
-    visibleMovies: visibleMovies,
-    recordsTotal: recordsTotal
-  }
-}
-
-export function fetchMovieSuccess(movies, visibleMovies, recordsTotal) {
+export function fetchMovieSuccess(movie) {
   return {
     type: FETCH_MOVIE_SUCCESS,
+    movie: movie
+  }
+}
+
+export function fetchMoviesByGenreSuccess(movies, recordsTotal) {
+  return {
+    type: FETCH_MOVIES_BY_GENRE_SUCCESS,
     movies: movies,
-    visibleMovies: visibleMovies,
+    // visibleMovies: visibleMovies,
     recordsTotal: recordsTotal
   }
 }
@@ -278,8 +292,8 @@ export function movieClick(id) {
   }
 }
 
-export function return2Search() {
-  return {
-    type: RETURN_2_SEARCH
-  }
-}
+// export function return2Search() {
+//   return {
+//     type: RETURN_2_SEARCH
+//   }
+// }
