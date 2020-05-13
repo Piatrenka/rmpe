@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import styles from "./MoviePage.css";
+// import styles from "./MoviePage.css";
 import SelectedRegion from "../SelectedRegion/SelectedRegion";
 // import OutputRegion from "../OutputRegion/OutputRegion";
 import OutputByGenreRegion from "../OutputByGenreRegion/OutputByGenreRegion"
 import StatusBar from "../StatusBar/StatusBar";
 import MovieNotFound from "../MovieNotFound/MovieNotFound"
 
-import { useLocation, useRouteMatch, useParams } from 'react-router-dom'
+// import { useLocation, useRouteMatch, useParams } from 'react-router-dom'
 
 import Loader from '../UI/Loader/Loader'
 import { connect } from 'react-redux'
 import { fetchMovie } from "../../redux/actions/actions";
-import { render } from "@testing-library/react";
+// import { render } from "@testing-library/react";
 
 class MoviePage extends Component {
   // console.log(props);
@@ -66,10 +66,10 @@ class MoviePage extends Component {
     //   Object.keys(this.props.movies).length === 0 ? {} : this.props.movies[this.props.match.params.movieId]
     // );
 
-    let movie = null
-    if (Object.keys(this.props.movies).length !== 0) {
-      movie = this.props.movies[this.props.match.params.movieId]
-    } 
+    const movie = this.props.movie
+    // if (Object.keys(this.props.movies).length !== 0) {
+    //   movie = this.props.movies[this.props.match.params.movieId]
+    // } 
 
     if (this.props.loading) return <Loader />
     if (!movie) return <MovieNotFound />
@@ -85,10 +85,10 @@ class MoviePage extends Component {
   }
 }
 
-function mapState2Props(state) {
+function mapState2Props(state, ownProps) {
   return {
-    // movie: state.appReducer.movies[this.props.match.params.movieId],
-    movies: state.appReducer.movies,
+    movie: state.appReducer.movies[ownProps.match.params.movieId],
+    // movies: state.appReducer.movies,
     loading: state.appReducer.loading,
   };
 }

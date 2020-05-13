@@ -1,5 +1,5 @@
 import React from "react";
-import Radium from "radium";
+// import Radium from "radium";
 import styles from "./MovieInfo.css";
 import posterNotFound from "../../keep-calm-poster-not-found.png";
 
@@ -11,29 +11,29 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Logo from "../Logo/Logo";
 
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 // import { return2Search } from "../../redux/actions/actions";
 
 import {Link} from 'react-router-dom'
 
-import Loader from "../UI/Loader/Loader";
+// import Loader from "../UI/Loader/Loader";
 
 const MovieInfo = props => {
   // console.log('MovieInfo Debug: props> ', props);
 
   // const movie = props.movie;
-  if (Object.keys(props.movie).length === 0 && props.movie.constructor === Object) {
-    return (
-      <div>
-        Movie not found
-        <Link to="/">
-          <Button>
-            Return to search
-          </Button>
-        </Link>
-      </div>
-    );
-  } 
+  // if (Object.keys(props.movie).length === 0 && props.movie.constructor === Object) {
+  //   return (
+  //     <div>
+  //       Movie not found
+  //       <Link to="/">
+  //         <Button>
+  //           Return to search
+  //         </Button>
+  //       </Link>
+  //     </div>
+  //   );
+  // } 
 
 
   let movie = props.movie
@@ -59,7 +59,7 @@ const MovieInfo = props => {
               <Link to='/'>
                 <Button
                   variant="outline-light"
-                  onClick={props.onReturn2MoviesClick}
+                  // onClick={props.onReturn2MoviesClick}
                 >
                   Return to search
                 </Button>
@@ -123,18 +123,20 @@ const MovieInfo = props => {
   );
 };
 
-function mapState2Props(state) {
-  return {
-    // movies: state.appReducer.movies,
-    // selectedMovieId: state.appReducer.selectedMovieId
-  };
-}
+// function mapState2Props(state) {
+//   return {
+//     // movies: state.appReducer.movies,
+//     // selectedMovieId: state.appReducer.selectedMovieId
+//   };
+// }
 
-function mapDispatch2Props(dispatch) {
-  return {
-    // onReturn2MoviesClick: () => dispatch(return2Search())
-  };
-}
+// function mapDispatch2Props(dispatch) {
+//   return {
+//     // onReturn2MoviesClick: () => dispatch(return2Search())
+//   };
+// }
 
-// export default Radium(MovieInfo);
-export default connect(mapState2Props, mapDispatch2Props)(MovieInfo);
+// // export default Radium(MovieInfo);
+// export default connect(mapState2Props, mapDispatch2Props)(MovieInfo);
+
+export default MovieInfo
