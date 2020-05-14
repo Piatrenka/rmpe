@@ -24,7 +24,7 @@ class OutputByGenreRegion extends Component {
     let comp;
   
     // Теперь movies это объект объектов с ключами по id фильма 
-    if (Object.keys(this.props.movies).length > 0) {
+    if (this.props.movies.length > 0) {
       comp = <Movies />;
     } else {
       comp = <MoviesNotFound />;
@@ -43,7 +43,7 @@ class OutputByGenreRegion extends Component {
 
 function mapState2Props(state) {
   return {
-    movies: state.appReducer.movies
+    movies: state.appReducer.visibleMovies.map(id => state.appReducer.movies[id])
   }
 }
 
