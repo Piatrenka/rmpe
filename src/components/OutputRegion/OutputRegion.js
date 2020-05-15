@@ -4,11 +4,15 @@ import Movies from "../Movies/Movies";
 import MoviesNotFound from "../MoviesNotFound/MoviesNotFound";
 import MoviesRelated from "../MoviesRelated/MoviesRelated";
 
+import {connect} from 'react-redux'
+// import { movieClick } from "../../redux/actions/actions";
+
 const OutputRegion = props => {
   let comp;
 
+  // Теперь movies это объект объектов с ключами по id фильма 
   if (props.movies.length > 0) {
-    comp = <Movies movies={props.movies} onMovieClick={props.onMovieClick} />;
+    comp = <Movies />;
   } else {
     comp = <MoviesNotFound />;
   }
@@ -22,4 +26,16 @@ const OutputRegion = props => {
   );
 };
 
-export default OutputRegion;
+function mapState2Props(state) {
+  return {
+    movies: state.appReducer.visibleMovies.map(id => state.appReducer.movies[id])
+  }
+}
+
+// function mapDispatch2Props(dispatch) {
+//   return {
+//     onMovieClick: id => dispatch(movieClick(id))
+//   }
+// }
+
+export default connect(mapState2Props, null)(OutputRegion);

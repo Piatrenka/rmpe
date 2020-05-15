@@ -6,10 +6,10 @@ import App from "./components/App/App";
 
 // Вся борода связанная с redux, в этой архитектуре хранилище покладено в index.js
 // редьюсеры покладаются в отдельные файлы в каталоге redux
-import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from './redux/reducers/rootReducer'
-import { Provider } from 'react-redux'
-import reduxThunk from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from "redux";
+import rootReducer from "./redux/reducers/rootReducer";
+import { Provider } from "react-redux";
+import reduxThunk from "redux-thunk";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -28,20 +28,22 @@ const loggerMiddleware = store => next => action => {
 
 // для этого в store надо дополнительно передать специальную функцию
 // которой в качестве параметра надо передать собственную функцию, это мегапипец...
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(
-  loggerMiddleware,
-  reduxThunk
-)))
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(loggerMiddleware, reduxThunk))
+);
 
 const data = {
   company: "Vebkomas",
-  created: new Date()
+  created: new Date(),
+  motto:
+    "It ain't what you don't know that gets you into trouble, it's what you know for sure that just ain't so..."
 };
 
 const app = (
   <Provider store={store}>
-    <App data={data}/>
+    <App data={data} />
   </Provider>
-)
+);
 
 ReactDOM.render(app, document.getElementById("app"));

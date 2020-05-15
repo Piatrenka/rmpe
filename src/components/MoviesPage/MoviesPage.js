@@ -1,38 +1,68 @@
-import React from "react";
+import React, {Component} from "react";
 import styles from "./MoviesPage.css";
 import SearchRegion from "../SearchRegion/SearchRegion";
 import OutputRegion from "../OutputRegion/OutputRegion";
 import StatusBar from "../StatusBar/StatusBar";
-import Loader from "../UI/Loader/Loader"
+import Loader from "../UI/Loader/Loader";
 
-function MoviesPage(props) {
-  // console.log('MoviesPage Debug: ', props);
-  return (
-    <div className={styles.region}>
-      {/* <h6>This is the MoviesPage Component</h6> */}
+import { connect } from "react-redux";
 
-      <SearchRegion
-        // searchQuery={props.searchQuery}
-        // searchBy={props.searchBy}
-        // sortBy={props.sortBy}
-        // onSearchQueryChange={props.onSearchQueryChange}
-        // onSearchModeChange={props.onSearchModeChange}
-        // onSubmit={props.onSubmit}
-      />
+import { fetchMovies } from "../../redux/actions/actions";
 
-      <StatusBar
-        // sortBy={props.sortBy}
-        // onSortModeChange={props.onSortModeChange}
-        // detectedAmount={props.detectedAmount}
-      />
+import {useRouteMatch, useParams} from 'react-router-dom'
 
-      {props.loading ? (
-        <Loader />
-      ) : (
-        <OutputRegion movies={props.movies} onMovieClick={props.onMovieClick} />
-      )}
-    </div>
-  );
+import qs from 'qs'
+
+class MoviesPage extends Component {
+  
+  getArgs() {
+    return qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+  }
+
+  async componentDidMount() {
+    
+    // console.log("MoviesPage Debug: ", this.props);
+    
+    // получить query параметры из props и передать в fetchMovies
+    this.props.fetchMovies(this.getArgs())
+  }
+  
+  // повторить Mount, сделать функцией
+  async componentDidUpdate(prevProps) {
+    // console.log('componentDidUpdate Debug:', this.props.location.search)
+    // const values = qs.parse(this.props.location.search)
+    // console.log('MoviesPage componentDidUpdate Debug: ', this.getArgs())
+    if (this.props.location.search !== prevProps.location.search) {
+      this.props.fetchMovies(this.getArgs())
+    }
+  }
+
+  render() {
+    return (
+      <div className={styles.region}>
+
+        <SearchRegion
+        />
+
+        <StatusBar
+        />
+
+        {this.props.loading ? <Loader /> : <OutputRegion />}
+      </div>
+    );
+  }
 }
 
-export default MoviesPage;
+function mapState2Props(state) {
+  return {
+    loading: state.appReducer.loading,
+  };
+}
+
+function mapDispatch2Props(dispatch) {
+  return {
+    fetchMovies: args => dispatch(fetchMovies(args))
+  };
+}
+
+export default connect(mapState2Props, mapDispatch2Props)(MoviesPage);

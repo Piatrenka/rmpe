@@ -2,13 +2,14 @@ import React from "react";
 import styles from "./SelectedRegion.css";
 import MovieInfo from "../MovieInfo/MovieInfo";
 
-import Button from "react-bootstrap/Button";
-import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form"
-import "bootstrap/dist/css/bootstrap.min.css";
+// import Button from "react-bootstrap/Button";
+// import Navbar from "react-bootstrap/Navbar";
+// import Form from "react-bootstrap/Form"
+
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 
-import Logo from "../Logo/Logo";
+// import Logo from "../Logo/Logo";
 
 const SelectedRegion = props => {
   // console.log(props)
@@ -21,9 +22,10 @@ const SelectedRegion = props => {
     <div className={styles.region}>
       {/* <h6>This is SelectedRegion Component</h6> */}
       <MovieInfo 
+        // movieId={props.movieId}
         movie={props.movie} 
-        onMovieClick={() => {}} 
-        onReturn2MoviesClick={props.onReturn2MoviesClick}
+        // onMovieClick={() => {}} 
+        // onReturn2MoviesClick={props.onReturn2MoviesClick}
       />
     </div>
   );

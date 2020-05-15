@@ -1,5 +1,5 @@
 import React from "react";
-import Radium from "radium";
+// import Radium from "radium";
 import styles from "./MovieInfo.css";
 import posterNotFound from "../../keep-calm-poster-not-found.png";
 
@@ -11,10 +11,38 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Logo from "../Logo/Logo";
 
-const MovieInfo = props => {
-  // console.log(props);
+// import {connect} from 'react-redux'
+// import { return2Search } from "../../redux/actions/actions";
 
-  const movie = props.movie;
+import {Link} from 'react-router-dom'
+
+// import Loader from "../UI/Loader/Loader";
+
+const MovieInfo = props => {
+  // console.log('MovieInfo Debug: props> ', props);
+
+  // const movie = props.movie;
+  // if (Object.keys(props.movie).length === 0 && props.movie.constructor === Object) {
+  //   return (
+  //     <div>
+  //       Movie not found
+  //       <Link to="/">
+  //         <Button>
+  //           Return to search
+  //         </Button>
+  //       </Link>
+  //     </div>
+  //   );
+  // } 
+
+
+  let movie = props.movie
+  // movie = props.movies.find(movie => {
+  //   return movie.id === Number.parseInt(props.movieId);
+  //   // return movie.id === 238;
+  // });
+
+  // movie = props.movies[0]
 
   const movieInfo = (
     <React.Fragment>
@@ -28,12 +56,14 @@ const MovieInfo = props => {
               style={{ marginTop: "10px" }}
               className="d-flex justify-content-end"
             >
-              <Button
-                variant="outline-light"
-                onClick={props.onReturn2MoviesClick}
-              >
-                Return to search
-              </Button>
+              <Link to='/'>
+                <Button
+                  variant="outline-light"
+                  // onClick={props.onReturn2MoviesClick}
+                >
+                  Return to search
+                </Button>
+              </Link>
             </div>
           </Col>
         </Row>
@@ -83,13 +113,30 @@ const MovieInfo = props => {
     <div
       className={styles.region}
       style={style}
-      onClick={e => props.onMovieClick(movie.id)}
+      // onClick={e => props.onMovieClick(movie.id)}
     >
       {/* <h6>This is the MovieInfo component</h6> */}
+      {/* {props.movies.length === 0 ? <Loader /> : {movieInfo}} */}
+
       {movieInfo}
     </div>
   );
 };
 
-export default Radium(MovieInfo);
-// export default MovieInfo;
+// function mapState2Props(state) {
+//   return {
+//     // movies: state.appReducer.movies,
+//     // selectedMovieId: state.appReducer.selectedMovieId
+//   };
+// }
+
+// function mapDispatch2Props(dispatch) {
+//   return {
+//     // onReturn2MoviesClick: () => dispatch(return2Search())
+//   };
+// }
+
+// // export default Radium(MovieInfo);
+// export default connect(mapState2Props, mapDispatch2Props)(MovieInfo);
+
+export default MovieInfo

@@ -5,12 +5,18 @@ import MovieInfoShort from "../MovieInfoShort/MovieInfoShort";
 
 import { Container, Row, Col, Card } from "react-bootstrap";
 
+import {connect} from 'react-redux'
+import { movieClick } from "../../redux/actions/actions";
+
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 const Movies = props => {
   let movies = null;
+  // let movie = null;
 
   movies = props.movies.map(movie => {
+    // movie = props.movies[id]  
     return (
       <Col
         key={movie.id}
@@ -38,4 +44,18 @@ const Movies = props => {
   );
 };
 
-export default Movies;
+function mapState2Props(state) {
+  return {
+    // movies: state.appReducer.movies,     // Объект объектов с ключем по id
+    // visibleMovies: state.appReducer.visibleMovies  // Массив с id фильмов
+    movies: state.appReducer.visibleMovies.map(id => state.appReducer.movies[id])
+  }
+}
+
+function mapDispatch2Props(dispatch) {
+  return {
+    onMovieClick: id => dispatch(movieClick(id))
+  }
+}
+
+export default connect(mapState2Props, mapDispatch2Props)(Movies);

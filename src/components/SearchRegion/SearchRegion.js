@@ -11,11 +11,53 @@ import {
   setSearchByMode
 } from "../../redux/actions/actions";
 
+import { Link, useHistory, useLocation } from 'react-router-dom'
+
+import qs from 'qs'
+
+function SearchRegion(props) {
+  
+    let history = useHistory()
+    let location = useLocation()
+
+    
+    
+    // Хранить локально
+    // sortOrder: "desc",
+    // search: props.searchQuery,
+    // searchBy: props.searchBy
+    // 
+    
+    const params = qs.parse(location.search, { ignoreQueryPrefix: true })
+    // console.log('params Debug: ', params)
+
+    const [form, setState] = React.useState({
+      sortOrder: "desc",
+      searchQuery: params.search || '',             // Строка поиска
+      searchBy: params.searchBy                    // режим поиска
+    });
+    
+    // console.log('SearchRegion Debug: ', form);
+    // console.log('SearchRegion.location Debug:', location.search)
+
+    // const params = qs.parse(location.search, { ignoreQueryPrefix: true })
+    // setState({
+    //   ...form,
+    //   searchQuery: params.searchQuery,
+    //   searchBy: params.searchBy
+    // })
+
+    const query = qs.stringify({
+      // sortBy: getState().appReducer.sortBy,
+      sortBy: props.sortBy,
+      sortOrder: form.sortOrder,
+      search: form.searchQuery,
+      searchBy: form.searchBy
+    });
+
+    // const url = `/search?${query}`;
 
 
-class SearchRegion extends Component {
-  // console.log(props);
-  render() {
     return (
       <div className={styles.SearchRegion}>
         {/* <h6>This is SearchRegion Component</h6> */}
@@ -28,39 +70,50 @@ class SearchRegion extends Component {
             <label>Find your movie</label>
             <input
               type="text"
-              value={this.props.searchQuery}
+              value={form.searchQuery}
               onChange={e => {
-                this.props.updateSearchQuery(e.target.value);
+                // props.updateSearchQuery(e.target.value);
+                setState({
+                  ...form,
+                  searchQuery: e.target.value
+                })
               }}
             />
             <label>
               Search By
               <select
-                value={this.props.searchBy}
+                value={form.searchBy}
                 onChange={e => {
-                  this.props.setSearchByMode(e.target.value);
+                  // props.setSearchByMode(e.target.value);
+                  setState({
+                    ...form,
+                    searchBy: e.target.value
+                  })
                 }}
               >
                 <option value={SearchModes.TITLE}>{SearchModes.TITLE}</option>
                 <option value={SearchModes.GENRE}>{SearchModes.GENRE}</option>
               </select>
             </label>
-            <input
-              type="button"
-              value="Submit"
-              onClick={() => this.props.fetchMovies()}
-            />
+              <input
+                type="button"
+                value="Submit"
+                onClick={() => history.replace({
+                  search: `?${query}`
+                })}
+              />
           </form>
         </div>
       </div>
     );
-  }
 }
 
 function mapState2Props(state) {
   return {
-    searchQuery: state.appReducer.searchQuery,
-    searchBy: state.appReducer.searchBy
+    sortBy: state.appReducer.sortBy,
+
+    // searchQuery: state.appReducer.searchQuery,
+    // searchBy: state.appReducer.searchBy,
   };
 }
 
