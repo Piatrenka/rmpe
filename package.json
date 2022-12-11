@@ -31,7 +31,7 @@
     "core-js": "3",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
-    "qs": "^6.9.3",
+    "qs": "^6.9.7",
     "radium": "^0.26.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
